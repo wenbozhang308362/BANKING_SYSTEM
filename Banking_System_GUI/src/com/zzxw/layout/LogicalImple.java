@@ -1,3 +1,15 @@
+//µÇÂ¼ 	login
+//String[]	loginVerification(String username,String pwd, String[][] info)
+//·µ»ØÖµ[µÇÂ¼×´Ì¬,ÓÃ»§index]
+//È¡Ç®	withdraw
+//void	withdraw(String amount,String index,String[][] info)
+//´æÇ®	deposit
+//void	deposit(String amount,String index,String[][] info)
+//×¢²á	register
+//String	regist(String username,String pwd,String[][] info)
+
+
+
 package com.zzxw.layout;
 
 import java.util.Arrays;
@@ -10,15 +22,18 @@ public class LogicalImple {
 			if(username.equals(info[i][1])){
 				UserCount++;
 				if(pwd.equals(info[i][2])){
+					System.out.println("Login successful");
 					return new String[] {"0",Integer.toString(i)};//login success
 					
 				}
 			}
 		}
 		if(UserCount==0){
+			System.out.println("User doesn't exist");
 			return new String[] {"1"};//user doesn't exist
 		}
 		else{
+			System.out.println("Password wrong");
 			return new String[] {"2"};//combination is wrong;
 		}
 	}
@@ -79,7 +94,7 @@ public class LogicalImple {
 		return balance;
 	}
 	
-	public String[] regist(String username,String pwd,String[][] info){
+	public String regist(String username,String pwd,String[][] info){
 		int count=0;
 		for(int i=0;i<info.length;i++){
 			if(username.equals(info[i][1])){
@@ -87,25 +102,24 @@ public class LogicalImple {
 			}
 		}
 		if(count>0){
-			return new String[] {"1"};	//user name already exist
+			System.out.println("User name already exist");
+			return "1";	//user name already exist
 		}
 		else {
 			String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
 			info=Arrays.copyOf(info, info.length+1);	
-//			System.out.println(info.length);
 			info[info.length-1]=new String[4];
-//			System.out.println(newuser.length);
 			for(int i=0;i<newuser.length;i++){
 				info[info.length-1][i]=newuser[i];
 			}
-//			System.out.println(Arrays.toString(info));
 			try {
 				new BankIO().writeexcel(info);
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e);
 			}
-			return new String[] {"0"};	//successful 
+			System.out.println("Register sucessful");
+			return "0";	//successful 
 		}
 		
 		
