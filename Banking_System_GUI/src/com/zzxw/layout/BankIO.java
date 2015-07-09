@@ -51,7 +51,7 @@ public class BankIO {
 			for(int i=0;i<info.length;i++){
 				for(int j=0;j<info[i].length;j++){
 //					System.out.println("j= "+j);
-					System.out.println(info[i][j]);
+//					System.out.println(info[i][j]);
 					Label label = new Label(j,i,info[i][j]);
 					sheet.addCell(label);
 					

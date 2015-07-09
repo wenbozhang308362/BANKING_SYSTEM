@@ -24,24 +24,34 @@ public class LogicalImple {
 	}
 	
 	
-	public String[][] withdraw(String amount,String index,String[][] info) {
+	public void withdraw(String amount,String index,String[][] info) {
 		int withdrawAmount=Integer.parseInt(amount);
 		int userindex=Integer.parseInt(index);
 		int Balance=Integer.parseInt(info[userindex][3]);
 		
 		int currentBanlance=Balance-withdrawAmount;
 		info[userindex][3]=Integer.toString(currentBanlance);
-		return info;
+		try {
+			new BankIO().writeexcel(info);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 	}
 	
-	public String[][] deposit(String amount,String index,String[][] info) {
+	public void deposit(String amount,String index,String[][] info) {
 		int depositAmount=Integer.parseInt(amount);
 		int userindex=Integer.parseInt(index);
 		int Balance=Integer.parseInt(info[userindex][3]);
 		
 		int currentBanlance=Balance+depositAmount;
 		info[userindex][3]=Integer.toString(currentBanlance);
-		return info;
+		try {
+			new BankIO().writeexcel(info);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 	}
 	
 	
@@ -69,14 +79,46 @@ public class LogicalImple {
 		return balance;
 	}
 	
+	public String[] regist(String username,String pwd,String[][] info){
+		int count=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				count++;
+			}
+		}
+		if(count>0){
+			return new String[] {"1"};	//user name already exist
+		}
+		else {
+			String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
+			info=Arrays.copyOf(info, info.length+1);	
+//			System.out.println(info.length);
+			info[info.length-1]=new String[4];
+//			System.out.println(newuser.length);
+			for(int i=0;i<newuser.length;i++){
+				info[info.length-1][i]=newuser[i];
+			}
+//			System.out.println(Arrays.toString(info));
+			try {
+				new BankIO().writeexcel(info);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e);
+			}
+			return new String[] {"0"};	//successful 
+		}
+		
+		
+	}
+	
 //	public static void main(String[] args) {
 //		String[][] test={{"1","asd","123456","1000"},{"2","asdfgh","234567","500"}};
 //		String[] s=new LogicalImple().loginVerification("asd", "123456",test);
 //		System.out.println(Arrays.toString(s));
-//		
-////		test=new LogicalImple().withdraw("500", "0", test);
-////		System.out.println(Arrays.toString(test[0]));
-//		
+		
+//		new LogicalImple().withdraw("500", "0", test);
+//		System.out.println(Arrays.toString(test[0]));
+		
 //		test=new LogicalImple().deposit("500", "0", test);
 //		System.out.println(Arrays.toString(test[0]));
 //		
@@ -84,6 +126,8 @@ public class LogicalImple {
 //		System.out.println(new LogicalImple().getBalance("0",test));
 //		System.out.println(new LogicalImple().getPwd("0",test));
 //		System.out.println(new LogicalImple().getUsername("0",test));
+		
+//		new LogicalImple().regist("mo", "123123", test);
 //	}
 	
 }
