@@ -287,107 +287,113 @@ public class MainFrame {
 		business.add(service_panel);
 		service_panel.setLayout(new CardLayout(0, 0));
 
-		JPanel welcome_panel = new JPanel();
-		service_panel.add(welcome_panel, "welcome_panel");
-		welcome_panel.setLayout(null);
+		JPanel Welcome_panel = new JPanel();
+		service_panel.add(Welcome_panel, "welcome_panel");
+		Welcome_panel.setLayout(null);
 
 		JLabel service_option = new JLabel(
 				"<html>Please select one <br> &nbsp; &nbsp; &nbsp;  option on the left .</html>");
 		service_option.setFont(new Font("Verdana", Font.PLAIN, 20));
 		service_option.setHorizontalAlignment(SwingConstants.CENTER);
 		service_option.setBounds(81, 101, 278, 107);
-		welcome_panel.add(service_option);
+		Welcome_panel.add(service_option);
 
 		JLabel Thankyou_label = new JLabel(
 				"Thank you for using our banking system");
 		Thankyou_label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Thankyou_label.setHorizontalAlignment(SwingConstants.CENTER);
 		Thankyou_label.setBounds(12, 13, 431, 75);
-		welcome_panel.add(Thankyou_label);
+		Welcome_panel.add(Thankyou_label);
 
-		JPanel withdraw_panel = new JPanel();
-		service_panel.add(withdraw_panel, "withdraw_panel");
-		withdraw_panel.setLayout(null);
+		JPanel Wthdraw_panel = new JPanel();
+		service_panel.add(Wthdraw_panel, "withdraw_panel");
+		Wthdraw_panel.setLayout(null);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Verdana", Font.PLAIN, 30));
 		textField.setColumns(10);
 		textField.setBounds(236, 151, 185, 37);
-		withdraw_panel.add(textField);
+		Wthdraw_panel.add(textField);
 		
 		JLabel label_2 = new JLabel("WithDraw:");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_2.setBounds(28, 141, 206, 59);
-		withdraw_panel.add(label_2);
+		Wthdraw_panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("Balance:");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_3.setBounds(26, 33, 180, 48);
-		withdraw_panel.add(label_3);
+		Wthdraw_panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("$");
 		label_4.setHorizontalAlignment(SwingConstants.LEFT);
 		label_4.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_4.setBounds(218, 33, 86, 48);
-		withdraw_panel.add(label_4);
+		Wthdraw_panel.add(label_4);
 		
 		JButton button = new JButton("OK");
 		button.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button.setBounds(149, 284, 97, 25);
-		withdraw_panel.add(button);
+		Wthdraw_panel.add(button);
 		
 		JButton button_1 = new JButton("BACK");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cards = (CardLayout) service_panel.getLayout();
+				cards.show(service_panel, "Welcome_panel");
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_1.setBounds(305, 284, 97, 25);
-		withdraw_panel.add(button_1);
+		Wthdraw_panel.add(button_1);
 
-		JPanel deposit_panel = new JPanel();
-		service_panel.add(deposit_panel, "deposit_panel");
-		deposit_panel.setLayout(null);
+		JPanel Deposit_panel = new JPanel();
+		service_panel.add(Deposit_panel, "deposit_panel");
+		Deposit_panel.setLayout(null);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Verdana", Font.PLAIN, 30));
 		textField_1.setColumns(10);
 		textField_1.setBounds(222, 166, 185, 37);
-		deposit_panel.add(textField_1);
+		Deposit_panel.add(textField_1);
 		
 		JLabel lblDeposit = new JLabel("Deposit:");
 		lblDeposit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeposit.setFont(new Font("Verdana", Font.BOLD, 30));
 		lblDeposit.setBounds(14, 156, 206, 59);
-		deposit_panel.add(lblDeposit);
+		Deposit_panel.add(lblDeposit);
 		
 		JLabel label_6 = new JLabel("Balance:");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_6.setBounds(12, 48, 180, 48);
-		deposit_panel.add(label_6);
+		Deposit_panel.add(label_6);
 		
 		JLabel label_7 = new JLabel("$");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
 		label_7.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_7.setBounds(204, 48, 86, 48);
-		deposit_panel.add(label_7);
+		Deposit_panel.add(label_7);
 		
 		JButton button_2 = new JButton("OK");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_2.setBounds(135, 299, 97, 25);
-		deposit_panel.add(button_2);
+		Deposit_panel.add(button_2);
 		
 		JButton button_3 = new JButton("BACK");
 		button_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_3.setBounds(291, 299, 97, 25);
-		deposit_panel.add(button_3);
+		Deposit_panel.add(button_3);
 		
-		JPanel details_panel = new JPanel();
-		service_panel.add(details_panel, "details_panel");
-		details_panel.setLayout(null);
+		JPanel Details_panel = new JPanel();
+		service_panel.add(Details_panel, "details_panel");
+		Details_panel.setLayout(null);
 		
-		JPanel transaction_panel = new JPanel();
-		service_panel.add(transaction_panel, "transaction_panel");
-		transaction_panel.setLayout(null);
+		JPanel Transaction_panel = new JPanel();
+		service_panel.add(Transaction_panel, "transaction_panel");
+		Transaction_panel.setLayout(null);
 
 		JPanel reset = new JPanel();
 		content.add(reset, "reset");
