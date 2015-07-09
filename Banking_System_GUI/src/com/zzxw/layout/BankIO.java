@@ -8,8 +8,7 @@ import jxl.Workbook;
 public class BankIO {
 	String[][] allin;
 
-	
-	public void readexcel(String filePath){
+	public String[][] readexcel(String filePath){
 		try {
 			InputStream is = new FileInputStream(filePath);
 			Workbook wb = Workbook.getWorkbook(is);
@@ -18,33 +17,25 @@ public class BankIO {
 			String[][] info=new String[rows][];
 			for(int i=0;i<rows;i++){
 				Cell[] cells=st.getRow(i);
-				System.out.println(cells[0].getContents().trim());
-				System.out.println(cells.length);
+//				System.out.println(cells[0].getContents().trim());
+//				System.out.println(cells.length);
 				info[i]=new String[4];
 				for(int j=0;j<cells.length;j++){
 					info[i][j]=cells[j].getContents().trim();
+					System.out.println(info[i][j]);
 				}
-//				System.out.println(info[0][1]);
 			}
-			
-//			System.out.println("rows: "+rows);
-//			for(int j=0;j<rows;j++){
-//				Cell[] cells = st.getRow(j);
-//				if (cells != null && cells.length != 0){
-//					System.out.println(cells[0].getContents().trim());
-//				}
-//			}
-			
-			
+			return info;
 			
 		} catch (Exception e) {
-//			System.out.println(e);
-			// TODO: handle exception
-		}
+			System.out.println(e);
+			String[][] info=new String[0][];
+			return info;
 			
+		}	
 	}
+	
 	public static void main(String[] args) {
-		BankIO obj1=new BankIO();
-		obj1.readexcel("info.xls");
+		new BankIO().readexcel("info.xls");
 	}
 }
