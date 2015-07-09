@@ -38,6 +38,14 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 
+import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
+import com.zzxw.layout.actions.PswForgetMouseAdapter;
+import com.zzxw.layout.actions.RegisterAction;
+import com.zzxw.layout.actions.RegisterMouseAdapter;
+import com.zzxw.layout.actions.back_btn;
+import com.zzxw.layout.actions.login_btn;
+import com.zzxw.layout.actions.logoff_btn;
+
 import java.awt.SystemColor;
 
 public class MainFrame {
@@ -142,7 +150,7 @@ public class MainFrame {
 		login.add(password_input);
 
 		JButton login_button = new JButton("LOGIN");
-		login_button.addActionListener(new login_btn());
+		login_button.addActionListener(new login_btn(content));
 		login_button.setFont(new Font("Verdana", Font.PLAIN, 16));
 		login_button.setBounds(322, 312, 99, 40);
 		login.add(login_button);
@@ -154,19 +162,7 @@ public class MainFrame {
 
 		JLabel psw_forget = new JLabel(
 				"<html><a href='#'>Forget Password</a></html>");
-		psw_forget.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				CardLayout cards = (CardLayout) content.getLayout();
-				cards.show(content, "reset");
-				info1.setVisible(false);
-				userName.setVisible(false);
-				JLabel psw_reset_label = new JLabel("Reset your password");
-				psw_reset_label.setFont(new Font("Verdana", Font.PLAIN, 20));
-				psw_reset_label.setHorizontalAlignment(SwingConstants.CENTER);
-				psw_reset_label.setBounds(143, 13, 267, 39);
-				frame.getContentPane().add(psw_reset_label);
-			}
-		});
+		psw_forget.addMouseListener(new PswForgetMouseAdapter(content, info1, userName, frame));
 		psw_forget.setToolTipText("Click me if you forget the password.");
 		psw_forget.setHorizontalAlignment(SwingConstants.CENTER);
 		psw_forget.setBounds(345, 264, 114, 26);
@@ -175,15 +171,7 @@ public class MainFrame {
 		JLabel register_label = new JLabel(
 				"<html><a href='#'>Register</a></html>");
 		register_label.setFont(new Font("Verdana", Font.PLAIN, 16));
-		register_label.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				CardLayout cards = (CardLayout) content.getLayout();
-				cards.show(content, "register");
-				info1.setVisible(false);
-				userName.setVisible(false);
-				
-			}
-		});
+		register_label.addMouseListener(new RegisterMouseAdapter(content, info1, userName));
 		register_label.setToolTipText("Create a new account");
 		register_label.setHorizontalAlignment(SwingConstants.CENTER);
 		register_label.setBounds(60, 321, 114, 26);
@@ -227,10 +215,10 @@ public class MainFrame {
 		btnOk.setBounds(389, 319, 99, 40);
 		register.add(btnOk);
 		
-		btnOk.addActionListener(new registerAction(new_password, info1, userName, content));
+		btnOk.addActionListener(new RegisterAction(new_password, info1, userName, content));
 
 		JButton btn_back = new JButton("BACK");
-		btn_back.addActionListener(new logoff_btn());
+		btn_back.addActionListener(new logoff_btn(content));
 		btn_back.setFont(new Font("Verdana", Font.PLAIN, 16));
 		btn_back.setBounds(229, 319, 99, 40);
 		register.add(btn_back);
@@ -294,7 +282,7 @@ public class MainFrame {
 		welcome_panel.add(Thankyou_label);
 		
 		JButton Logoff = new JButton("LogOff");
-		Logoff.addActionListener(new logoff_btn());
+		Logoff.addActionListener(new logoff_btn(content));
 		Logoff.setFont(new Font("Arial", Font.PLAIN, 15));
 		Logoff.setBounds(262, 289, 97, 43);
 		welcome_panel.add(Logoff);
@@ -333,7 +321,7 @@ public class MainFrame {
 		withdraw_panel.add(button);
 		
 		JButton button_1 = new JButton("BACK");
-		button_1.addActionListener(new back_btn());
+		button_1.addActionListener(new back_btn(service_panel));
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_1.setBounds(305, 284, 97, 25);
 		withdraw_panel.add(button_1);
@@ -372,7 +360,7 @@ public class MainFrame {
 		deposit_panel.add(button_2);
 		
 		JButton button_3 = new JButton("BACK");
-		button_3.addActionListener(new back_btn());
+		button_3.addActionListener(new back_btn(service_panel));
 		button_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_3.setBounds(291, 299, 97, 25);
 		deposit_panel.add(button_3);
@@ -416,13 +404,7 @@ public class MainFrame {
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setFont(new Font("Verdana", Font.PLAIN, 16));
 		lblNewLabel_6.setBounds(84, 279, 272, 47);
-		lblNewLabel_6.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				CardLayout cards = (CardLayout) service_panel.getLayout();
-				cards.show(service_panel, "Password_panel");
-				
-			}
-		});
+		lblNewLabel_6.addMouseListener(new PasswordUpdateMouseAdapter(service_panel));
 		details_panel.add(lblNewLabel_6);
 		
 		JLabel label_10 = new JLabel("");
@@ -432,12 +414,7 @@ public class MainFrame {
 		details_panel.add(label_10);
 		
 		JButton btnNewButton_2 = new JButton("BACK");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cards = (CardLayout) service_panel.getLayout();
-				cards.show(service_panel, "Welcome_panel");
-			}
-		});
+		btnNewButton_2.addActionListener(new back_btn(service_panel));
 		btnNewButton_2.setBounds(319, 339, 97, 25);
 		details_panel.add(btnNewButton_2);
 		
@@ -450,11 +427,11 @@ public class MainFrame {
 		password_panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Update");
-		btnNewButton.setBounds(161, 296, 73, 41);
+		btnNewButton.setBounds(140, 296, 94, 41);
 		password_panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Back");
-		btnNewButton_1.addActionListener(new back_btn());
+		btnNewButton_1.addActionListener(new back_btn(service_panel));
 		btnNewButton_1.setBounds(290, 296, 73, 41);
 		password_panel.add(btnNewButton_1);
 		
@@ -531,31 +508,8 @@ public class MainFrame {
 		}
 	}
 	
-	class back_btn implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			CardLayout cards = (CardLayout) service_panel.getLayout();
-			cards.show(service_panel, "Welcome_panel");
-		}		
-	}
-	class login_btn implements ActionListener{
-		@Override
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cards = (CardLayout) content.getLayout();
-				cards.show(content, "business");
-			}	
-	}
-	
-	class logoff_btn implements ActionListener{
-		@Override
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cards = (CardLayout) content.getLayout();
-				cards.show(content, "login");
-			}	
-	}
-	
+
 
 	
-	
+
 }

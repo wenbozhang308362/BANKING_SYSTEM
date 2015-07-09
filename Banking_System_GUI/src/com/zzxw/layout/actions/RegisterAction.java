@@ -1,4 +1,4 @@
-package com.zzxw.layout;
+package com.zzxw.layout.actions;
 
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
@@ -9,14 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
-public class registerAction implements ActionListener{
+public class RegisterAction implements ActionListener{
 	private JPasswordField new_password;
 	private JLabel label1;
 	private JLabel userName ;
 	private JPanel content;
 	
 	
-	public registerAction(JPasswordField new_password, JLabel label1,
+	public RegisterAction(JPasswordField new_password, JLabel label1,
 			JLabel userName, JPanel content) {
 		super();
 		this.new_password = new_password;
