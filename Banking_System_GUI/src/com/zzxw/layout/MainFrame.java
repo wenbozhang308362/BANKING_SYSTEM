@@ -224,7 +224,7 @@ public class MainFrame {
 		btnOk.setBounds(389, 319, 99, 40);
 		register.add(btnOk);
 		
-		btnOk.addActionListener(new RegisterAction(new_password, info1, userName, content));
+		btnOk.addActionListener(new RegisterAction(new_password,info1,userName, content, new_username,info));
 
 		JButton btn_back = new JButton("BACK");
 		btn_back.addActionListener(new logoff_btn(content,accountNumberLabel,accountNumber, userName));

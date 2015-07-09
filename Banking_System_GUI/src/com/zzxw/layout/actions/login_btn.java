@@ -51,6 +51,14 @@ public class login_btn implements ActionListener{
 				String temp=a+"";
 				pwd+=temp;
 			}
+			BankIO bIO= new BankIO();
+			try {
+				info = bIO.readexcel();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
+			}
 			String flag[]=li.loginVerification(username, pwd, info);
 			String accountNum=li.getAccountId(flag[1], info);
 			String uName=li.getUsername(flag[1], info);
