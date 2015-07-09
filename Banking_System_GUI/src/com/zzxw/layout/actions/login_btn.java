@@ -3,25 +3,77 @@ package com.zzxw.layout.actions;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import com.zzxw.layout.BankIO;
+import com.zzxw.layout.LogicalImple;
 
 public class login_btn implements ActionListener{
 	
 	private JPanel content;
+	private JTextField username_input;
+	private JPasswordField password_input;
+	private String[][] info = null;
+	private JLabel userName;
+	private JLabel accountNumberLabel;
+	private JLabel accountNumber;
 	
-	
-	
-	public login_btn(JPanel content) {
+
+	public login_btn(JPanel content, JTextField username_input,
+			JPasswordField password_input, String[][] info, JLabel userName,
+			JLabel accountNumberLabel, JLabel accountNumber) {
 		super();
 		this.content = content;
+		this.username_input = username_input;
+		this.password_input = password_input;
+		this.info = info;
+		this.userName = userName;
+		this.accountNumberLabel = accountNumberLabel;
+		this.accountNumber = accountNumber;
 	}
-
 
 
 	@Override
 		public void actionPerformed(ActionEvent e) {
-			CardLayout cards = (CardLayout) content.getLayout();
-			cards.show(content, "business");
+			LogicalImple li= new LogicalImple();
+			
+			String username="";
+			String pwd="";
+			username=username_input.getText();
+//			pwd=Arrays.toString(password_input.getPassword());
+			for(char a:password_input.getPassword()){
+				String temp=a+"";
+				pwd+=temp;
+			}
+			String flag[]=li.loginVerification(username, pwd, info);
+			String accountNum=li.getAccountId(flag[1], info);
+			String uName=li.getUsername(flag[1], info);
+			
+			if(flag[0].equals("0")){
+				CardLayout cards = (CardLayout) content.getLayout();
+				cards.show(content, "business");
+				accountNumberLabel.setVisible(true);
+				accountNumber.setVisible(true);				
+				userName.setText(uName);
+				accountNumber.setText(accountNum);
+				
+				
+			}else if(flag[0].equals("1")){
+				JOptionPane.showMessageDialog(null, "user not exist,please re-enter");
+			}else if(flag[0].equals("2")){
+				JOptionPane.showMessageDialog(null, "user not exist,please re-enter");
+			}else{
+				System.exit(-1);
+			}
 		}	
+	
+	
+	
+	
 }

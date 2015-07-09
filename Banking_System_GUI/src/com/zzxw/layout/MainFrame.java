@@ -38,6 +38,7 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 
+import com.zzxw.layout.actions.Exit;
 import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
@@ -51,8 +52,6 @@ import java.awt.SystemColor;
 public class MainFrame {
 
 	private JFrame frame;
-	private JTextField username_input;
-	private JPasswordField password_input;
 	private JPasswordField username4Reset;
 	private JTree service_tree;
 	private JPanel service_panel;
@@ -62,6 +61,7 @@ public class MainFrame {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JPasswordField passwordField_2;
+	private static String[][] info;
 
 
 
@@ -72,6 +72,14 @@ public class MainFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					BankIO bIO= new BankIO();
+					try {
+						info = bIO.readexcel();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						System.out.println("Read error from file!");
+					}
 					MainFrame window = new MainFrame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -99,7 +107,7 @@ public class MainFrame {
 
 		content = new JPanel();
 		content.setBounds(0, 52, 590, 385);
-		frame.getContentPane().add(content);
+		frame.getContentPane().add(content, "content");
 		content.setLayout(new CardLayout(0, 0));
 
 		JLabel info1 = new JLabel("Welcome:");
@@ -111,11 +119,11 @@ public class MainFrame {
 		userName.setBounds(80, 18, 56, 16);
 		frame.getContentPane().add(userName);
 
-		JLabel label2 = new JLabel("Account#:");
-		label2.setHorizontalAlignment(SwingConstants.RIGHT);
-		label2.setBounds(295, 13, 75, 26);
-		frame.getContentPane().add(label2);
-		label2.setVisible(false);
+		JLabel accountNumberLabel = new JLabel("Account#:");
+		accountNumberLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		accountNumberLabel.setBounds(295, 13, 75, 26);
+		frame.getContentPane().add(accountNumberLabel);
+		accountNumberLabel.setVisible(false);
 
 		JLabel accountNumber = new JLabel("");
 		accountNumber.setBounds(376, 18, 56, 16);
@@ -138,24 +146,25 @@ public class MainFrame {
 		login_password.setBounds(69, 189, 218, 62);
 		login.add(login_password);
 
-		username_input = new JTextField();
+		JTextField username_input = new JTextField();
 		username_input.setFont(new Font("Verdana", Font.PLAIN, 25));
 		username_input.setBounds(301, 75, 200, 50);
 		login.add(username_input);
 		username_input.setColumns(10);
 
-		password_input = new JPasswordField();
+		JPasswordField password_input = new JPasswordField();
 		password_input.setFont(new Font("Verdana", Font.PLAIN, 25));
 		password_input.setBounds(301, 201, 200, 50);
 		login.add(password_input);
 
 		JButton login_button = new JButton("LOGIN");
-		login_button.addActionListener(new login_btn(content));
+		login_button.addActionListener(new login_btn(content, username_input, password_input, info,userName,accountNumberLabel,accountNumber));
 		login_button.setFont(new Font("Verdana", Font.PLAIN, 16));
 		login_button.setBounds(322, 312, 99, 40);
 		login.add(login_button);
 
 		JButton exit_button = new JButton("EXIT");
+		exit_button.addActionListener(new Exit());
 		exit_button.setFont(new Font("Verdana", Font.PLAIN, 16));
 		exit_button.setBounds(433, 312, 108, 40);
 		login.add(exit_button);
@@ -218,7 +227,7 @@ public class MainFrame {
 		btnOk.addActionListener(new RegisterAction(new_password, info1, userName, content));
 
 		JButton btn_back = new JButton("BACK");
-		btn_back.addActionListener(new logoff_btn(content));
+		btn_back.addActionListener(new logoff_btn(content,accountNumberLabel,accountNumber, userName));
 		btn_back.setFont(new Font("Verdana", Font.PLAIN, 16));
 		btn_back.setBounds(229, 319, 99, 40);
 		register.add(btn_back);
@@ -282,7 +291,7 @@ public class MainFrame {
 		welcome_panel.add(Thankyou_label);
 		
 		JButton Logoff = new JButton("LogOff");
-		Logoff.addActionListener(new logoff_btn(content));
+		Logoff.addActionListener(new logoff_btn(content,accountNumberLabel,accountNumber, userName));
 		Logoff.setFont(new Font("Arial", Font.PLAIN, 15));
 		Logoff.setBounds(262, 289, 97, 43);
 		welcome_panel.add(Logoff);
