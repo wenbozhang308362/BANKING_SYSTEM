@@ -63,19 +63,19 @@ public class BankIO {
 	
 	
 	
-	public static void main(String[] args) {
-		String[][] test={{"1","2"},{"asd","asdfgh"},{"123456","22222"},{"500","1000"}};
+//	public static void main(String[] args) {
+//		String[][] test={{"1","2"},{"asd","asdfgh"},{"123456","22222"},{"500","1000"}};
+////		try {
+////			new BankIO().readexcel();
+////		} catch (Exception e) {
+////			System.out.println(e);
+////			// TODO: handle exception
+////		}
 //		try {
-//			new BankIO().readexcel();
+//			new BankIO().writeexcel(test);
 //		} catch (Exception e) {
 //			System.out.println(e);
 //			// TODO: handle exception
 //		}
-		try {
-			new BankIO().writeexcel(test);
-		} catch (Exception e) {
-			System.out.println(e);
-			// TODO: handle exception
-		}
-	}
+//	}
 }
