@@ -1,5 +1,7 @@
 package com.zzxw.layout;
 import java.io.File;
+import java.util.Arrays;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -18,15 +20,18 @@ public class BankIO {
 			wb = Workbook.getWorkbook(file);
 			Sheet st = wb.getSheet(0);
 			int rows = st.getRows();
+			System.out.println("rows:"+rows);
 			String[][] info=new String[rows][];
 			for(int i=0;i<rows;i++){
 				Cell[] cells=st.getRow(i);
 				info[i]=new String[4];
 				for(int j=0;j<cells.length;j++){
 					info[i][j]=cells[j].getContents().trim();
-					System.out.println(info[i][j]);
+//					System.out.println(info[i][j]);
 				}
 			}
+			String[] s=info[0];
+//			System.out.println(Arrays.toString(s));
 			return info;
 		} catch (Exception e) {
 			System.out.println(e);
@@ -47,7 +52,7 @@ public class BankIO {
 				for(int j=0;j<info[i].length;j++){
 //					System.out.println("j= "+j);
 					System.out.println(info[i][j]);
-					Label label = new Label(i,j,info[i][j]);
+					Label label = new Label(j,i,info[i][j]);
 					sheet.addCell(label);
 					
 				}
@@ -64,18 +69,18 @@ public class BankIO {
 	
 	
 //	public static void main(String[] args) {
-//		String[][] test={{"1","2"},{"asd","asdfgh"},{"123456","22222"},{"500","1000"}};
-////		try {
-////			new BankIO().readexcel();
-////		} catch (Exception e) {
-////			System.out.println(e);
-////			// TODO: handle exception
-////		}
+//		String[][] test={{"1","bob","1234567","1000"},{"2","asdfgh","234567","500"}};
 //		try {
-//			new BankIO().writeexcel(test);
+//			new BankIO().readexcel();
 //		} catch (Exception e) {
 //			System.out.println(e);
 //			// TODO: handle exception
 //		}
+////		try {
+////			new BankIO().writeexcel(test);
+////		} catch (Exception e) {
+////			System.out.println(e);
+////			// TODO: handle exception
+////		}
 //	}
 }
