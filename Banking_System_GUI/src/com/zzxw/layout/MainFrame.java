@@ -62,6 +62,10 @@ public class MainFrame {
 	private JPasswordField passwordField_1;
 	private JPasswordField passwordField_2;
 	private static String[][] info;
+	private JLabel userName;
+	private JLabel Uname;
+	private JLabel accountNumber;
+	private JLabel ActNum;
 
 
 
@@ -115,7 +119,7 @@ public class MainFrame {
 		info1.setBounds(12, 13, 64, 26);
 		frame.getContentPane().add(info1);
 
-		JLabel userName = new JLabel("Guest");
+		userName = new JLabel("Guest");
 		userName.setBounds(80, 18, 56, 16);
 		frame.getContentPane().add(userName);
 
@@ -125,7 +129,7 @@ public class MainFrame {
 		frame.getContentPane().add(accountNumberLabel);
 		accountNumberLabel.setVisible(false);
 
-		JLabel accountNumber = new JLabel("");
+		accountNumber = new JLabel("");
 		accountNumber.setBounds(376, 18, 56, 16);
 		frame.getContentPane().add(accountNumber);
 		accountNumber.setVisible(false);
@@ -354,13 +358,13 @@ public class MainFrame {
 		JLabel label_6 = new JLabel("Balance:");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_6.setBounds(12, 48, 180, 48);
+		label_6.setBounds(14, 59, 180, 48);
 		deposit_panel.add(label_6);
 		
 		JLabel label_7 = new JLabel("$");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
 		label_7.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_7.setBounds(204, 48, 86, 48);
+		label_7.setBounds(222, 59, 86, 48);
 		deposit_panel.add(label_7);
 		
 		JButton button_2 = new JButton("OK");
@@ -384,7 +388,7 @@ public class MainFrame {
 		lblNewLabel.setBounds(27, 45, 133, 47);
 		details_panel.add(lblNewLabel);
 		
-		JLabel Uname = new JLabel("");
+		Uname = new JLabel("");
 		Uname.setFont(new Font("Arial", Font.PLAIN, 20));
 		Uname.setHorizontalAlignment(SwingConstants.CENTER);
 		Uname.setBounds(183, 45, 211, 47);
@@ -396,7 +400,7 @@ public class MainFrame {
 		lblNewLabel_2.setBounds(27, 121, 133, 47);
 		details_panel.add(lblNewLabel_2);
 		
-		JLabel ActNum = new JLabel("");
+		ActNum = new JLabel("");
 		ActNum.setFont(new Font("Arial", Font.PLAIN, 20));
 		ActNum.setHorizontalAlignment(SwingConstants.CENTER);
 		ActNum.setBounds(183, 121, 211, 47);
@@ -416,11 +420,11 @@ public class MainFrame {
 		lblNewLabel_6.addMouseListener(new PasswordUpdateMouseAdapter(service_panel));
 		details_panel.add(lblNewLabel_6);
 		
-		JLabel label_10 = new JLabel("");
-		label_10.setHorizontalAlignment(SwingConstants.CENTER);
-		label_10.setFont(new Font("Arial", Font.PLAIN, 20));
-		label_10.setBounds(183, 197, 211, 47);
-		details_panel.add(label_10);
+		JLabel Detail_balance = new JLabel("");
+		Detail_balance.setHorizontalAlignment(SwingConstants.CENTER);
+		Detail_balance.setFont(new Font("Arial", Font.PLAIN, 20));
+		Detail_balance.setBounds(183, 197, 211, 47);
+		details_panel.add(Detail_balance);
 		
 		JButton btnNewButton_2 = new JButton("BACK");
 		btnNewButton_2.addActionListener(new back_btn(service_panel));
@@ -512,6 +516,10 @@ public class MainFrame {
 			cards.show(service_panel, "Deposit_panel");
 		} else if (option.equals("Details")) {
 			cards.show(service_panel, "Details_panel");
+			String username= userName.getText();
+			Uname.setText(username);
+			String accountN=accountNumber.getText();
+			ActNum.setText(accountN);			
 		}else if(option.equals("Transaction")){
 			cards.show(service_panel, "Transaction_panel");
 		}
