@@ -152,20 +152,28 @@ public class LogicalImple {
 		}
 	}
 	
-	public void changePwd(String newpwd,String username,String[][] info){
+	public int changePwd(String oldpwd,String newpwd,String username,String[][] info){
 		int userindex=0;
 		for(int i=0;i<info.length;i++){
 			if(username.equals(info[i][1])){
 				userindex=i;
 				}
 			}
+		System.out.println(oldpwd);
+//		System.out.println(newpwd);
+		if(oldpwd.equals(info[userindex][2])){
 		info[userindex][2]=newpwd;
-		try {
-			new BankIO().writeexcel(info);
-			System.out.println("Password change sucessful");
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+			try {
+				new BankIO().writeexcel(info);
+				System.out.println("Password change sucessful");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e);
+			}
+			return 0;	//change pwd success
+		} else{
+			System.out.println("wrong");
+			return 1;	//pwd wrong
 		}
 		
 	}

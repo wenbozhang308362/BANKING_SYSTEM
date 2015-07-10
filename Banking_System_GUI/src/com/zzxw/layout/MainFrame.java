@@ -456,6 +456,7 @@ public class MainFrame {
 		JButton btnNewButton = new JButton("Update");
 		btnNewButton.setBounds(140, 296, 94, 41);
 		password_panel.add(btnNewButton);
+		btnNewButton.addActionListener(new PwdUpdate_Action());
 
 		JButton btnNewButton_1 = new JButton("Back");
 		btnNewButton_1.addActionListener(new back_btn(service_panel));
@@ -612,6 +613,40 @@ public class MainFrame {
 
 			}
 
+		}
+		class PwdUpdate_Action implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				String username = userName.getText();
+				String oldPwd = "";
+				for(char a:passwordField.getPassword()){
+					String temp=a+"";
+					oldPwd+=temp;
+				}
+				String newPwd = "";
+				for(char a:passwordField_1.getPassword()){
+					String temp=a+"";
+					newPwd+=temp;
+				}
+				String newPwdConfirm = "";
+				for(char a:passwordField_2.getPassword()){	
+					String temp=a+"";
+					newPwdConfirm+=temp;
+				}
+				
+				if(!newPwd.equals(newPwdConfirm)){
+					JOptionPane.showMessageDialog(null, "Two Passworld doesn't match");
+				}
+				else{
+					LogicalImple li = new LogicalImple();
+					int i=li.changePwd(oldPwd, newPwd, username, info);
+					if(i==1){
+						JOptionPane.showMessageDialog(null, "Old Passworld is WRONG");
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Password change successful");
+					}
+				}
+			}
 		}
 
 }
