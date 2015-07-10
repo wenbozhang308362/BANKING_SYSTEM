@@ -38,9 +38,7 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 
-import com.zzxw.layout.actions.Depo_OK_btn_Action;
 import com.zzxw.layout.actions.Exit;
-import com.zzxw.layout.actions.Ok_btn_Action;
 import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
@@ -72,9 +70,9 @@ public class MainFrame {
 	JLabel label_7;
 	JButton button;
 	JButton button_2;
-	
-	static BankIO bIO= new BankIO();
+	JLabel Detail_balance;
 
+	static BankIO bIO = new BankIO();
 
 	/**
 	 * Launch the application.
@@ -168,7 +166,9 @@ public class MainFrame {
 		login.add(password_input);
 
 		JButton login_button = new JButton("LOGIN");
-		login_button.addActionListener(new login_btn(content, username_input, password_input, info,userName,accountNumberLabel,accountNumber));
+		login_button.addActionListener(new login_btn(content, username_input,
+				password_input, info, userName, accountNumberLabel,
+				accountNumber));
 		login_button.setFont(new Font("Verdana", Font.PLAIN, 16));
 		login_button.setBounds(322, 312, 99, 40);
 		login.add(login_button);
@@ -181,7 +181,8 @@ public class MainFrame {
 
 		JLabel psw_forget = new JLabel(
 				"<html><a href='#'>Forget Password</a></html>");
-		psw_forget.addMouseListener(new PswForgetMouseAdapter(content, info1, userName, frame));
+		psw_forget.addMouseListener(new PswForgetMouseAdapter(content, info1,
+				userName, frame));
 		psw_forget.setToolTipText("Click me if you forget the password.");
 		psw_forget.setHorizontalAlignment(SwingConstants.CENTER);
 		psw_forget.setBounds(345, 264, 114, 26);
@@ -190,7 +191,8 @@ public class MainFrame {
 		JLabel register_label = new JLabel(
 				"<html><a href='#'>Register</a></html>");
 		register_label.setFont(new Font("Verdana", Font.PLAIN, 16));
-		register_label.addMouseListener(new RegisterMouseAdapter(content, info1, userName));
+		register_label.addMouseListener(new RegisterMouseAdapter(content,
+				info1, userName));
 		register_label.setToolTipText("Create a new account");
 		register_label.setHorizontalAlignment(SwingConstants.CENTER);
 		register_label.setBounds(60, 321, 114, 26);
@@ -233,16 +235,17 @@ public class MainFrame {
 		btnOk.setFont(new Font("Verdana", Font.PLAIN, 16));
 		btnOk.setBounds(389, 319, 99, 40);
 		register.add(btnOk);
-		
-		btnOk.addActionListener(new RegisterAction(new_password,info1,userName, content, new_username,info));
+
+		btnOk.addActionListener(new RegisterAction(new_password, info1,
+				userName, content, new_username, info));
 
 		JButton btn_back = new JButton("BACK");
-		btn_back.addActionListener(new logoff_btn(content,accountNumberLabel,accountNumber, userName));
+		btn_back.addActionListener(new logoff_btn(content, accountNumberLabel,
+				accountNumber, userName));
 		btn_back.setFont(new Font("Verdana", Font.PLAIN, 16));
 		btn_back.setBounds(229, 319, 99, 40);
 		register.add(btn_back);
-		
-		
+
 		JPanel business = new JPanel();
 		business.setLayout(null);
 		content.add(business, "business");
@@ -250,23 +253,22 @@ public class MainFrame {
 		service_tree = new JTree();
 		service_tree.setBackground(SystemColor.window);
 		service_tree.setFont(new Font("Arial", Font.PLAIN, 14));
-		service_tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Index") {
-				private static final long serialVersionUID = 5789142137729073831L;
+		service_tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode(
+				"Index") {
+			private static final long serialVersionUID = 5789142137729073831L;
 
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Bank Service");
-						node_1.add(new DefaultMutableTreeNode("Withdraw"));
-						node_1.add(new DefaultMutableTreeNode("Deposit"));
-					add(node_1);
-					node_1 = new DefaultMutableTreeNode("Self Service");
-						node_1.add(new DefaultMutableTreeNode("Details"));
-						node_1.add(new DefaultMutableTreeNode("Transaction"));
-					add(node_1);
-				}
+			{
+				DefaultMutableTreeNode node_1;
+				node_1 = new DefaultMutableTreeNode("Bank Service");
+				node_1.add(new DefaultMutableTreeNode("Withdraw"));
+				node_1.add(new DefaultMutableTreeNode("Deposit"));
+				add(node_1);
+				node_1 = new DefaultMutableTreeNode("Self Service");
+				node_1.add(new DefaultMutableTreeNode("Details"));
+				node_1.add(new DefaultMutableTreeNode("Transaction"));
+				add(node_1);
 			}
-		));
+		}));
 		service_tree.setBounds(0, 0, 135, 385);
 		service_tree
 				.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -299,9 +301,10 @@ public class MainFrame {
 		Thankyou_label.setHorizontalAlignment(SwingConstants.CENTER);
 		Thankyou_label.setBounds(12, 13, 431, 75);
 		welcome_panel.add(Thankyou_label);
-		
+
 		JButton Logoff = new JButton("LogOff");
-		Logoff.addActionListener(new logoff_btn(content,accountNumberLabel,accountNumber, userName));
+		Logoff.addActionListener(new logoff_btn(content, accountNumberLabel,
+				accountNumber, userName));
 		Logoff.setFont(new Font("Arial", Font.PLAIN, 15));
 		Logoff.setBounds(262, 289, 97, 43);
 		welcome_panel.add(Logoff);
@@ -309,37 +312,38 @@ public class MainFrame {
 		JPanel withdraw_panel = new JPanel();
 		service_panel.add(withdraw_panel, "Withdraw_panel");
 		withdraw_panel.setLayout(null);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Verdana", Font.PLAIN, 30));
 		textField.setColumns(10);
 		textField.setBounds(236, 151, 185, 37);
 		withdraw_panel.add(textField);
-		
+
 		JLabel label_2 = new JLabel("WithDraw:");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_2.setBounds(28, 141, 206, 59);
 		withdraw_panel.add(label_2);
-		
+
 		JLabel label_3 = new JLabel("Balance:");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_3.setBounds(26, 33, 180, 48);
 		withdraw_panel.add(label_3);
-		
+
 		label_4 = new JLabel("$");
 		label_4.setHorizontalAlignment(SwingConstants.LEFT);
 		label_4.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_4.setBounds(218, 33, 86, 48);
 		withdraw_panel.add(label_4);
-		
+
 		button = new JButton("OK");
-		
+
 		button.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button.setBounds(149, 284, 97, 25);
 		withdraw_panel.add(button);
-		
+		button.addActionListener(new Ok_btn_Action());
+
 		JButton button_1 = new JButton("BACK");
 		button_1.addActionListener(new back_btn(service_panel));
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -349,139 +353,141 @@ public class MainFrame {
 		JPanel deposit_panel = new JPanel();
 		service_panel.add(deposit_panel, "Deposit_panel");
 		deposit_panel.setLayout(null);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Verdana", Font.PLAIN, 30));
 		textField_1.setColumns(10);
 		textField_1.setBounds(222, 166, 185, 37);
 		deposit_panel.add(textField_1);
-		
+
 		JLabel lblDeposit = new JLabel("Deposit:");
 		lblDeposit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeposit.setFont(new Font("Verdana", Font.BOLD, 30));
 		lblDeposit.setBounds(14, 156, 206, 59);
 		deposit_panel.add(lblDeposit);
-		
+
 		JLabel label_6 = new JLabel("Balance:");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_6.setBounds(14, 59, 180, 48);
 		deposit_panel.add(label_6);
-		
+
 		label_7 = new JLabel("$");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
 		label_7.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_7.setBounds(222, 59, 86, 48);
 		deposit_panel.add(label_7);
-		
+
 		button_2 = new JButton("OK");
 
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_2.setBounds(135, 299, 97, 25);
-		deposit_panel.add(button_2);
-		
+		button_2.addActionListener(new Depo_OK_btn_Action());
+		deposit_panel.add(button_2);		
+
 		JButton button_3 = new JButton("BACK");
 		button_3.addActionListener(new back_btn(service_panel));
 		button_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_3.setBounds(291, 299, 97, 25);
 		deposit_panel.add(button_3);
-		
+
 		JPanel details_panel = new JPanel();
 		service_panel.add(details_panel, "Details_panel");
 		details_panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("UserName:");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(27, 45, 133, 47);
 		details_panel.add(lblNewLabel);
-		
+
 		Uname = new JLabel("");
 		Uname.setFont(new Font("Arial", Font.PLAIN, 20));
 		Uname.setHorizontalAlignment(SwingConstants.CENTER);
 		Uname.setBounds(183, 45, 211, 47);
 		details_panel.add(Uname);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Account#:");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(27, 121, 133, 47);
 		details_panel.add(lblNewLabel_2);
-		
+
 		ActNum = new JLabel("");
 		ActNum.setFont(new Font("Arial", Font.PLAIN, 20));
 		ActNum.setHorizontalAlignment(SwingConstants.CENTER);
 		ActNum.setBounds(183, 121, 211, 47);
 		details_panel.add(ActNum);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("Balance:");
 		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setBounds(27, 197, 133, 47);
 		details_panel.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_6= new JLabel(
+
+		JLabel lblNewLabel_6 = new JLabel(
 				"<html><a href='#'>Update your password</a></html>");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setFont(new Font("Verdana", Font.PLAIN, 16));
 		lblNewLabel_6.setBounds(84, 279, 272, 47);
-		lblNewLabel_6.addMouseListener(new PasswordUpdateMouseAdapter(service_panel));
+		lblNewLabel_6.addMouseListener(new PasswordUpdateMouseAdapter(
+				service_panel));
 		details_panel.add(lblNewLabel_6);
-		
-		JLabel Detail_balance = new JLabel("");
+
+		Detail_balance = new JLabel("");
 		Detail_balance.setHorizontalAlignment(SwingConstants.CENTER);
 		Detail_balance.setFont(new Font("Arial", Font.PLAIN, 20));
 		Detail_balance.setBounds(183, 197, 211, 47);
 		details_panel.add(Detail_balance);
-		
+
 		JButton btnNewButton_2 = new JButton("BACK");
 		btnNewButton_2.addActionListener(new back_btn(service_panel));
 		btnNewButton_2.setBounds(319, 339, 97, 25);
 		details_panel.add(btnNewButton_2);
-		
+
 		JPanel transaction_panel = new JPanel();
 		service_panel.add(transaction_panel, "Transaction_panel");
 		transaction_panel.setLayout(null);
-		
+
 		JPanel password_panel = new JPanel();
 		service_panel.add(password_panel, "Password_panel");
 		password_panel.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Update");
 		btnNewButton.setBounds(140, 296, 94, 41);
 		password_panel.add(btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Back");
 		btnNewButton_1.addActionListener(new back_btn(service_panel));
 		btnNewButton_1.setBounds(290, 296, 73, 41);
 		password_panel.add(btnNewButton_1);
-		
+
 		JLabel lblNewLabel_7 = new JLabel("Old Password:");
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNewLabel_7.setBounds(25, 62, 160, 29);
 		password_panel.add(lblNewLabel_7);
-		
+
 		passwordField = new JPasswordField();
 		passwordField.setBounds(197, 63, 137, 28);
 		password_panel.add(passwordField);
-		
+
 		JLabel lblNewPassword = new JLabel("New Password:");
 		lblNewPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNewPassword.setBounds(25, 124, 160, 29);
 		password_panel.add(lblNewPassword);
-		
+
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(197, 125, 137, 28);
 		password_panel.add(passwordField_1);
-		
+
 		JLabel lblPasswordConfirm = new JLabel("Password Confirm:");
 		lblPasswordConfirm.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordConfirm.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblPasswordConfirm.setBounds(25, 195, 160, 29);
 		password_panel.add(lblPasswordConfirm);
-		
+
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setBounds(197, 196, 137, 28);
 		password_panel.add(passwordField_2);
@@ -504,7 +510,7 @@ public class MainFrame {
 		Reset.setFont(new Font("Verdana", Font.PLAIN, 15));
 		Reset.setBounds(399, 310, 129, 35);
 		reset.add(Reset);
-		
+
 		JLabel reset_label_info = new JLabel("Please enter your Username: ");
 		reset_label_info.setFont(new Font("Verdana", Font.PLAIN, 22));
 		reset_label_info.setHorizontalAlignment(SwingConstants.CENTER);
@@ -530,7 +536,7 @@ public class MainFrame {
 			}
 			LogicalImple li= new LogicalImple();
 			label_4.setText(li.getBalance(username, info));
-			button.addActionListener(new Ok_btn_Action(textField,userName,info,bIO,label_4));
+
 		} else if (option.equals("Deposit")) {
 			cards.show(service_panel, "Deposit_panel");
 			try {
@@ -542,19 +548,69 @@ public class MainFrame {
 			}
 			LogicalImple li= new LogicalImple();
 			label_7.setText(li.getBalance(username, info));
-			button_2.addActionListener(new Depo_OK_btn_Action(textField_1, userName,info, bIO,label_7));
 		} else if (option.equals("Details")) {
 			cards.show(service_panel, "Details_panel");
 			Uname.setText(username);
 			String accountN=accountNumber.getText();
-			ActNum.setText(accountN);			
+			ActNum.setText(accountN);	
+			
+			try {
+				info = bIO.readexcel();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
+			}
+			LogicalImple li= new LogicalImple();
+			Detail_balance.setText(li.getBalance(username, info));
 		}else if(option.equals("Transaction")){
 			cards.show(service_panel, "Transaction_panel");
 		}
 	}
-	
 
 
-	
+		class Depo_OK_btn_Action implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				String username = userName.getText();
+				String depositNum = textField_1.getText();
+				LogicalImple li = new LogicalImple();
+				li.deposit(depositNum, username, info);
+
+				try {
+					info = bIO.readexcel();
+					System.out.println("balance from depo:" + info[2][3]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("Read error from file!");
+				}
+
+				label_7.setText(li.getBalance(username, info));
+
+			}
+		}
+		
+		class Ok_btn_Action implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				String username = userName.getText();
+				String withdrawNum = textField.getText();
+				LogicalImple li = new LogicalImple();
+				li.withdraw(withdrawNum, username, info);
+
+				try {
+					info = bIO.readexcel();
+					System.out.println("balance from withd:"+info[2][3]);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					System.out.println("Read error from file!");
+				}
+
+				label_4.setText(li.getBalance(username, info));
+
+			}
+
+		}
 
 }
+
