@@ -20,7 +20,6 @@ public class BankIO {
 			wb = Workbook.getWorkbook(file);
 			Sheet st = wb.getSheet(0);
 			int rows = st.getRows();
-			System.out.println("rows:"+rows);
 			String[][] info=new String[rows][];
 			for(int i=0;i<rows;i++){
 				Cell[] cells=st.getRow(i);
