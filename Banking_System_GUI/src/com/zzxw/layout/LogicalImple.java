@@ -40,11 +40,15 @@ public class LogicalImple {
 	}
 	
 	
-	public void withdraw(String amount,String index,String[][] info) {
+	public void withdraw(String amount,String username,String[][] info) {
 		int withdrawAmount=Integer.parseInt(amount);
-		int userindex=Integer.parseInt(index);
+		int userindex=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				}
+			}
 		int Balance=Integer.parseInt(info[userindex][3]);
-		
 		int currentBanlance=Balance-withdrawAmount;
 		info[userindex][3]=Integer.toString(currentBanlance);
 		try {
@@ -55,11 +59,15 @@ public class LogicalImple {
 		}
 	}
 	
-	public void deposit(String amount,String index,String[][] info) {
+	public void deposit(String amount,String username,String[][] info) {
+		int userindex=0;
 		int depositAmount=Integer.parseInt(amount);
-		int userindex=Integer.parseInt(index);
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				}
+			}
 		int Balance=Integer.parseInt(info[userindex][3]);
-		
 		int currentBanlance=Balance+depositAmount;
 		info[userindex][3]=Integer.toString(currentBanlance);
 		try {
@@ -83,17 +91,28 @@ public class LogicalImple {
 		return username;
 	}
 	
-	public String getPwd(String index,String[][] info) {
-		int userindex=Integer.parseInt(index);
+	public String getPwd(String username,String[][] info) {
+		int userindex=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				}
+			}
 		String pwd=info[userindex][2];
 		return pwd;
 	}
 	
-	public String getBalance(String index,String[][] info) {
-		int userindex=Integer.parseInt(index);
+	public String getBalance(String username,String[][] info) {
+		int userindex=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				}
+			}
 		String balance=info[userindex][3];
 		return balance;
 	}
+
 	
 	public String regist(String username,String pwd,String[][] info){
 		int count=0;
@@ -124,8 +143,13 @@ public class LogicalImple {
 		}
 	}
 	
-	public void changePwd(String newpwd,String index,String[][] info){
-		int userindex=Integer.parseInt(index);
+	public void changePwd(String newpwd,String username,String[][] info){
+		int userindex=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				}
+			}
 		info[userindex][2]=newpwd;
 		try {
 			new BankIO().writeexcel(info);
@@ -149,13 +173,13 @@ public class LogicalImple {
 //		System.out.println(Arrays.toString(test[0]));
 //		
 //		System.out.println(new LogicalImple().getAccountId("0",test));
-//		System.out.println(new LogicalImple().getBalance("0",test));
 //		System.out.println(new LogicalImple().getPwd("0",test));
 //		System.out.println(new LogicalImple().getUsername("0",test));
 		
 //		new LogicalImple().regist("mo", "123123", test);
 //		try {
 //			String[][] test=new BankIO().readexcel();
+//			System.out.println(new LogicalImple().getBalance("asdfgh",test));
 //			new LogicalImple().changePwd("new password test", "0", test);
 //		} catch (Exception e) {
 //			// TODO: handle exception
