@@ -7,7 +7,8 @@
 //void	deposit(String amount,String index,String[][] info)
 //×¢²á	register
 //String	regist(String username,String pwd,String[][] info)
-
+//¸ÄÃÜÂë	change password
+//void	changePwd(String newpwd,String index,String[][] info)
 
 
 package com.zzxw.layout;
