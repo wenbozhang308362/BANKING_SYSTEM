@@ -121,7 +121,18 @@ public class LogicalImple {
 			System.out.println("Register sucessful");
 			return "0";	//successful 
 		}
-		
+	}
+	
+	public void changePwd(String newpwd,String index,String[][] info){
+		int userindex=Integer.parseInt(index);
+		info[userindex][2]=newpwd;
+		try {
+			new BankIO().writeexcel(info);
+			System.out.println("Password change sucessful");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
 		
 	}
 	
@@ -142,6 +153,13 @@ public class LogicalImple {
 //		System.out.println(new LogicalImple().getUsername("0",test));
 		
 //		new LogicalImple().regist("mo", "123123", test);
+//		try {
+//			String[][] test=new BankIO().readexcel();
+//			new LogicalImple().changePwd("new password test", "0", test);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.out.println(e);
+//		}
 //	}
 	
 }
