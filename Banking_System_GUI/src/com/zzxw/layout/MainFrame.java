@@ -578,7 +578,7 @@ public class MainFrame {
 
 				try {
 					info = bIO.readexcel();
-					System.out.println("balance from depo:" + info[2][3]);
+//					System.out.println("balance from depo:" + info[2][3]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -595,11 +595,13 @@ public class MainFrame {
 				String username = userName.getText();
 				String withdrawNum = textField.getText();
 				LogicalImple li = new LogicalImple();
-				li.withdraw(withdrawNum, username, info);
-
+				int i=li.withdraw(withdrawNum, username, info);
+				if(i==1){
+					JOptionPane.showMessageDialog(null, "Withdraw Amount Exceed Current Balance");
+				}
 				try {
 					info = bIO.readexcel();
-					System.out.println("balance from withd:"+info[2][3]);
+//					System.out.println("balance from withd:"+info[2][3]);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

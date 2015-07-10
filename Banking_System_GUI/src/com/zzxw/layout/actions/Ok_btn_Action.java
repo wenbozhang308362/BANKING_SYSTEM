@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.zzxw.layout.BankIO;
@@ -31,11 +32,14 @@ public class Ok_btn_Action implements ActionListener {
 		String username = userName.getText();
 		String withdrawNum = textField.getText();
 		LogicalImple li = new LogicalImple();
-		li.withdraw(withdrawNum, username, info);
-
+//		System.out.println("test");
+		int i=li.withdraw(withdrawNum, username, info);
+		if(i==1){
+			JOptionPane.showMessageDialog(null, "Register Successfully");
+		}
 		try {
 			info = bIO.readexcel();
-			System.out.println("balance from withd:"+info[2][3]);
+//			System.out.println("balance from withd:"+info[2][3]);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

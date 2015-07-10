@@ -40,7 +40,7 @@ public class LogicalImple {
 	}
 	
 	
-	public void withdraw(String amount,String username,String[][] info) {
+	public int withdraw(String amount,String username,String[][] info) {
 		int withdrawAmount=Integer.parseInt(amount);
 		int userindex=0;
 		for(int i=0;i<info.length;i++){
@@ -49,13 +49,20 @@ public class LogicalImple {
 				}
 			}
 		int Balance=Integer.parseInt(info[userindex][3]);
-		int currentBanlance=Balance-withdrawAmount;
-		info[userindex][3]=Integer.toString(currentBanlance);
-		try {
-			new BankIO().writeexcel(info);
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+		if(Balance>=withdrawAmount){
+			int currentBanlance=Balance-withdrawAmount;
+			info[userindex][3]=Integer.toString(currentBanlance);
+			try {
+				new BankIO().writeexcel(info);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e);
+			}
+			return 0;	//withdraw sucessful
+		}
+		else{
+			System.out.println("Withdraw Amount Excess Balance");
+			return 1;	//Withdraw Amount Excess Balance
 		}
 	}
 	
@@ -119,8 +126,10 @@ public class LogicalImple {
 		for(int i=0;i<info.length;i++){
 			if(username.equals(info[i][1])){
 				count++;
+				System.out.println(count);
 			}
 		}
+		System.out.println(count);
 		if(count>0){
 			System.out.println("User name already exist");
 			return "1";	//user name already exist

@@ -40,9 +40,6 @@ public class RegisterAction implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if (!new_password.getText().isEmpty()&&!new_password.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Register Successfully");
-			CardLayout cards = (CardLayout) content.getLayout();
-			cards.show(content, "login");
 			LogicalImple li= new LogicalImple();
 			String pwd="";
 			String username="";
@@ -51,7 +48,14 @@ public class RegisterAction implements ActionListener{
 				String temp=a+"";
 				pwd+=temp;
 			}
-			li.regist(username, pwd, info);
+			String str=li.regist(username, pwd, info);
+			if(str.equals("0")){
+				JOptionPane.showMessageDialog(null, "Register Successfully");
+				CardLayout cards = (CardLayout) content.getLayout();
+				cards.show(content, "login");
+			} else{
+				JOptionPane.showMessageDialog(null, "Username Already Exsit");
+			}
 			info1.setVisible(true);
 			userName.setVisible(true);
 		}
