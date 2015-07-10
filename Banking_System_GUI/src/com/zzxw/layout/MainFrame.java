@@ -38,7 +38,9 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 
+import com.zzxw.layout.actions.Depo_OK_btn_Action;
 import com.zzxw.layout.actions.Exit;
+import com.zzxw.layout.actions.Ok_btn_Action;
 import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
@@ -66,7 +68,12 @@ public class MainFrame {
 	private JLabel Uname;
 	private JLabel accountNumber;
 	private JLabel ActNum;
-
+	JLabel label_4;
+	JLabel label_7;
+	JButton button;
+	JButton button_2;
+	
+	static BankIO bIO= new BankIO();
 
 
 	/**
@@ -76,7 +83,6 @@ public class MainFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BankIO bIO= new BankIO();
 					try {
 						info = bIO.readexcel();
 					} catch (Exception e1) {
@@ -322,13 +328,14 @@ public class MainFrame {
 		label_3.setBounds(26, 33, 180, 48);
 		withdraw_panel.add(label_3);
 		
-		JLabel label_4 = new JLabel("$");
+		label_4 = new JLabel("$");
 		label_4.setHorizontalAlignment(SwingConstants.LEFT);
 		label_4.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_4.setBounds(218, 33, 86, 48);
 		withdraw_panel.add(label_4);
 		
-		JButton button = new JButton("OK");
+		button = new JButton("OK");
+		
 		button.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button.setBounds(149, 284, 97, 25);
 		withdraw_panel.add(button);
@@ -361,13 +368,14 @@ public class MainFrame {
 		label_6.setBounds(14, 59, 180, 48);
 		deposit_panel.add(label_6);
 		
-		JLabel label_7 = new JLabel("$");
+		label_7 = new JLabel("$");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
 		label_7.setFont(new Font("Verdana", Font.BOLD, 30));
 		label_7.setBounds(222, 59, 86, 48);
 		deposit_panel.add(label_7);
 		
-		JButton button_2 = new JButton("OK");
+		button_2 = new JButton("OK");
+
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_2.setBounds(135, 299, 97, 25);
 		deposit_panel.add(button_2);
@@ -509,14 +517,34 @@ public class MainFrame {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) service_tree
 				.getLastSelectedPathComponent();
 		String option = (String) node.getUserObject();
+		String username= userName.getText();
 		CardLayout cards = (CardLayout) service_panel.getLayout();
 		if (option.equals("Withdraw")) {
 			cards.show(service_panel, "Withdraw_panel");
+			try {
+				info = bIO.readexcel();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
+			}
+			LogicalImple li= new LogicalImple();
+			label_4.setText(li.getBalance(username, info));
+			button.addActionListener(new Ok_btn_Action(textField,userName,info,bIO,label_4));
 		} else if (option.equals("Deposit")) {
 			cards.show(service_panel, "Deposit_panel");
+			try {
+				info = bIO.readexcel();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
+			}
+			LogicalImple li= new LogicalImple();
+			label_7.setText(li.getBalance(username, info));
+			button_2.addActionListener(new Depo_OK_btn_Action(textField_1, userName,info, bIO,label_7));
 		} else if (option.equals("Details")) {
 			cards.show(service_panel, "Details_panel");
-			String username= userName.getText();
 			Uname.setText(username);
 			String accountN=accountNumber.getText();
 			ActNum.setText(accountN);			
