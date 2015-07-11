@@ -40,9 +40,7 @@ public class RegisterAction implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		if (!new_password.getText().isEmpty()&&!new_password.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Register Successfully");
-			CardLayout cards = (CardLayout) content.getLayout();
-			cards.show(content, "login");
+			
 			LogicalImple li= new LogicalImple();
 			String pwd="";
 			String username="";
@@ -50,6 +48,21 @@ public class RegisterAction implements ActionListener{
 			for(char a:new_password.getPassword()){
 				String temp=a+"";
 				pwd+=temp;
+			}
+			if(username.equals(pwd)){
+				JOptionPane.showMessageDialog(null, "Password should be different from the username");
+			}
+			else if(!username.equals(pwd)){
+				if(pwd.length() < 6){
+					JOptionPane.showMessageDialog(null, "The length of the password should contain at least 6 characters!");
+				}
+				else{
+				JOptionPane.showMessageDialog(null, "Register Successfully");
+				CardLayout cards = (CardLayout) content.getLayout();
+				cards.show(content, "login");
+				new_password.setText("");
+				new_username.setText("");
+				}
 			}
 			li.regist(username, pwd, info);
 			info1.setVisible(true);

@@ -15,6 +15,8 @@ package com.zzxw.layout;
 
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
+
 public class LogicalImple {
 	
 	public String[] loginVerification(String username,String pwd, String[][] info){
@@ -121,8 +123,9 @@ public class LogicalImple {
 				count++;
 			}
 		}
-		if(count>0){
-			System.out.println("User name already exist");
+		if(count > 0){
+			System.out.println("User name already existed");
+			JOptionPane.showMessageDialog(null, "User name already existed");
 			return "1";	//user name already exist
 		}
 		else {

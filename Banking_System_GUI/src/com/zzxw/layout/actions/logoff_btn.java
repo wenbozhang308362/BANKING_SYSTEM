@@ -31,6 +31,7 @@ public class logoff_btn implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		CardLayout cards = (CardLayout) content.getLayout();
 		cards.show(content, "login");
+		
 		accountNumber.setVisible(false);
 		accountNumberLabel.setVisible(false);
 		userName.setText("Guest");
