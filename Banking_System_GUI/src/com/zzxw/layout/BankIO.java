@@ -20,18 +20,21 @@ public class BankIO {
 			wb = Workbook.getWorkbook(file);
 			Sheet st = wb.getSheet(0);
 			int rows = st.getRows();
+			if(rows>0){
 			String[][] info=new String[rows][];
-			for(int i=0;i<rows;i++){
-				Cell[] cells=st.getRow(i);
-				info[i]=new String[4];
-				for(int j=0;j<cells.length;j++){
-					info[i][j]=cells[j].getContents().trim();
-//					System.out.println(info[i][j]);
+				for(int i=0;i<rows;i++){
+					Cell[] cells=st.getRow(i);
+					info[i]=new String[4];
+					for(int j=0;j<cells.length;j++){
+						info[i][j]=cells[j].getContents().trim();
+	//					System.out.println(info[i][j]);
+					}
 				}
+				return info;
+			} else{
+				return new String[0][0];
 			}
-			String[] s=info[0];
-//			System.out.println(Arrays.toString(s));
-			return info;
+
 		} catch (Exception e) {
 			System.out.println(e);
 			String[][] info=new String[0][];
