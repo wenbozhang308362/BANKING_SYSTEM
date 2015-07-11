@@ -77,6 +77,7 @@ public class MainFrame {
 
 	static BankIO bIO = new BankIO();
 	private JTextField email4reset;
+	private JTextField Reset_Username;
 
 	/**
 	 * Launch the application.
@@ -502,27 +503,28 @@ public class MainFrame {
 
 		JButton back = new JButton("BACK");
 		back.setFont(new Font("Verdana", Font.PLAIN, 15));
-		back.setBounds(269, 310, 89, 35);
+		back.setBounds(251, 334, 89, 35);
 		reset.add(back);
 		back.addActionListener(new back_btn_reset(content));
 
 		JButton Reset = new JButton("RESET");
 		Reset.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Reset.setBounds(399, 310, 89, 35);
+		Reset.setBounds(392, 334, 89, 35);
 		reset.add(Reset);
 		Reset.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
-				TestCommon.main(null);
+				String email=email4reset.getText();
+				String username=Reset_Username.getText();
+				new TestCommon(email,username).main(null);
 			}
 		});
 		//Reset.addActionListener(new Reset_button());
 
-		JLabel reset_label_info = new JLabel("Please enter your Email Address: ");
+		JLabel reset_label_info = new JLabel("Please enter your Email & Username : ");
 		reset_label_info.setFont(new Font("Verdana", Font.PLAIN, 22));
 		reset_label_info.setHorizontalAlignment(SwingConstants.CENTER);
-		reset_label_info.setBounds(30, 55, 414, 68);
+		reset_label_info.setBounds(30, 55, 458, 68);
 		reset.add(reset_label_info);
 		
 		email4reset = new JTextField();
@@ -530,6 +532,12 @@ public class MainFrame {
 		email4reset.setColumns(10);
 		email4reset.setBounds(158, 134, 257, 50);
 		reset.add(email4reset);
+		
+		Reset_Username = new JTextField();
+		Reset_Username.setFont(new Font("Verdana", Font.PLAIN, 25));
+		Reset_Username.setColumns(10);
+		Reset_Username.setBounds(158, 227, 257, 50);
+		reset.add(Reset_Username);
 
 	}
 

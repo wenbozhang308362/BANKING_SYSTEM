@@ -10,7 +10,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 public class BankIO {
-	File file = new File("C:\\Users\\Baoting\\Desktop\\info.xls");
+	File file = new File("info.xls");
 	Workbook wb=null;
 	WritableWorkbook wwb=null;
 	
