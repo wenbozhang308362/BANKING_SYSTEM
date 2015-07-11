@@ -53,7 +53,7 @@ public class RegisterAction implements ActionListener{
 				info=new BankIO().readexcel();
 			} catch (Exception e2) {
 				// TODO: handle exception
-				System.out.println(e);
+				System.out.println(e2);
 			}
 			String str=li.regist(username, pwd, info);
 			if(str.equals("0")){
