@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.zzxw.layout.BankIO;
 import com.zzxw.layout.LogicalImple;
 
 public class RegisterAction implements ActionListener{
@@ -47,6 +48,12 @@ public class RegisterAction implements ActionListener{
 			for(char a:new_password.getPassword()){
 				String temp=a+"";
 				pwd+=temp;
+			}
+			try {
+				info=new BankIO().readexcel();
+			} catch (Exception e2) {
+				// TODO: handle exception
+				System.out.println(e);
 			}
 			String str=li.regist(username, pwd, info);
 			if(str.equals("0")){

@@ -60,23 +60,21 @@ public class login_btn implements ActionListener{
 				System.out.println("Read error from file!");
 			}
 			String flag[]=li.loginVerification(username, pwd, info);
-			String accountNum=li.getAccountId(flag[1], info);
-			String uName=li.getUsername(flag[1], info);
 			
 			if(flag[0].equals("0")){
+				String accountNum=li.getAccountId(flag[1], info);
+				String uName=li.getUsername(flag[1], info);
 				CardLayout cards = (CardLayout) content.getLayout();
 				cards.show(content, "business");
 				accountNumberLabel.setVisible(true);
 				accountNumber.setVisible(true);				
 				userName.setText(uName);
-				accountNumber.setText(accountNum);
-				
-				
-			}else if(flag[0].equals("1")){
-				JOptionPane.showMessageDialog(null, "user not exist,please re-enter");
-			}else if(flag[0].equals("2")){
-				JOptionPane.showMessageDialog(null, "user not exist,please re-enter");
-			}else{
+				accountNumber.setText(accountNum);			
+			} else if(flag[0].equals("1")){
+				JOptionPane.showMessageDialog(null, "User does not exist,please re-enter");
+			} else if(flag[0].equals("2")){
+				JOptionPane.showMessageDialog(null, "Password is Wrong!");
+			} else{
 				System.exit(-1);
 			}
 		}	
