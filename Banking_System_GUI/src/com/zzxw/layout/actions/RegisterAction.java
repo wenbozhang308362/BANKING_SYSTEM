@@ -62,9 +62,9 @@ public class RegisterAction implements ActionListener{
 				cards.show(content, "login");
 				new_password.setText("");
 				new_username.setText("");
+				li.regist(username, pwd, info);
 				}
 			}
-			li.regist(username, pwd, info);
 			info1.setVisible(true);
 			userName.setVisible(true);
 		}
