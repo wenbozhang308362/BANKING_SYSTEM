@@ -66,6 +66,8 @@ public class login_btn implements ActionListener{
 				String uName=li.getUsername(flag[1], info);
 				CardLayout cards = (CardLayout) content.getLayout();
 				cards.show(content, "business");
+				username_input.setText("");
+				password_input.setText("");
 				accountNumberLabel.setVisible(true);
 				accountNumber.setVisible(true);				
 				userName.setText(uName);
