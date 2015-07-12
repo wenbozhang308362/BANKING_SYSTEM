@@ -137,7 +137,7 @@ public class LogicalImple {
 		}
 		System.out.println(count);
 		if(count>0){
-			System.out.println("User name already exist");
+			System.out.println("User name already existed");
 			return "1";	//user name already exist
 		}
 		else {
@@ -153,7 +153,7 @@ public class LogicalImple {
 				// TODO: handle exception
 				System.out.println(e);
 			}
-			System.out.println("Register sucessful");
+			System.out.println("Register sucessfully");
 			return "0";	//successful 
 		}
 	}
@@ -171,7 +171,7 @@ public class LogicalImple {
 		info[userindex][2]=newpwd;
 			try {
 				new BankIO().writeexcel(info);
-				System.out.println("Password change sucessful");
+				System.out.println("Password changed sucessfully");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e);
@@ -197,7 +197,7 @@ public class LogicalImple {
 			info[userindex][2]=newPwd;
 			try {
 				new BankIO().writeexcel(info);
-				System.out.println("Password reset sucessful");
+				System.out.println("Password reset sucessfully");
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e);
@@ -242,7 +242,7 @@ public class LogicalImple {
 			if(i==1){
 				JOptionPane.showMessageDialog(null, "User doesn't exist");
 			} else {
-				JOptionPane.showMessageDialog(null, "Your new password has been sent to your through email");
+				JOptionPane.showMessageDialog(null, "Your new password has been sent to your email");
 				email.send();
 			}
 			

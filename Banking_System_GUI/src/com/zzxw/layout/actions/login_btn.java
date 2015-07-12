@@ -70,6 +70,7 @@ public class login_btn implements ActionListener{
 				accountNumberLabel.setVisible(true);
 				accountNumber.setVisible(true);				
 				userName.setText(uName);
+				userName.setVisible(true);
 				accountNumber.setText(accountNum);			
 			} else if(flag[0].equals("1")){
 				JOptionPane.showMessageDialog(null, "User does not exist,please re-enter");
