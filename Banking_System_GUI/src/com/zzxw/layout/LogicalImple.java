@@ -93,7 +93,6 @@ public class LogicalImple {
 		try {
 			new BankIO().writeexcel(info);
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e);
 		}
 	}

@@ -637,8 +637,16 @@ public class MainFrame {
 					if(i==1){
 						JOptionPane.showMessageDialog(null, "Old Passworld is WRONG");
 					}
-					else{
+					else if (oldPwd.equals(newPwdConfirm)) {
+						JOptionPane.showMessageDialog(null, "New password should be different from the old password!");
+					}
+					else if (!oldPwd.equals(newPwdConfirm)){
 						JOptionPane.showMessageDialog(null, "Password has been changed successfully");
+						passwordField.setText("");
+						CardLayout cards = (CardLayout) service_panel.getLayout();
+						cards.show(service_panel, "Details_panel");
+						//passwordField1.setText("");
+						//passwordField2.setText("");
 					}
 				}
 			}
