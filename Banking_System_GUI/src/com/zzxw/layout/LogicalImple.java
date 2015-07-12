@@ -13,15 +13,13 @@
 
 package com.zzxw.layout;
 
-import java.awt.CardLayout;
 import java.util.Arrays;
 import java.util.Random;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
-import org.apache.commons.mail.*;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 public class LogicalImple {
 	

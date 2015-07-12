@@ -1,62 +1,39 @@
 package com.zzxw.layout;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-
 import java.awt.CardLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-
+import java.awt.EventQueue;
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-
-import java.awt.event.ActionListener;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.swing.JToolBar;
-import javax.swing.JComboBox;
-import javax.swing.JProgressBar;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.tree.DefaultTreeModel;
+import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
-
-import java.awt.Color;
-
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.BevelBorder;
-
-import org.apache.commons.mail.*;
+import javax.swing.tree.DefaultTreeModel;
 
 import com.zzxw.layout.actions.Exit;
 import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
 import com.zzxw.layout.actions.RegisterMouseAdapter;
-//import com.zzxw.layout.actions.Reset_button;
 import com.zzxw.layout.actions.back_btn;
 import com.zzxw.layout.actions.back_btn_reset;
 import com.zzxw.layout.actions.login_btn;
 import com.zzxw.layout.actions.logoff_btn;
 
-import java.awt.SystemColor;
-
 public class MainFrame {
 
 	private JFrame frame;
-	private JPasswordField username4Reset;
 	private JTree service_tree;
 	private JPanel service_panel;
 	private JPanel content;
@@ -189,7 +166,7 @@ public class MainFrame {
 		JLabel psw_forget = new JLabel(
 				"<html><a href='#'>Forget Password</a></html>");
 		psw_forget.addMouseListener(new PswForgetMouseAdapter(content, info1,
-				userName, frame));
+				userName));
 		psw_forget.setToolTipText("Click me if you forget the password.");
 		psw_forget.setHorizontalAlignment(SwingConstants.CENTER);
 		psw_forget.setBounds(345, 264, 114, 26);
@@ -504,16 +481,11 @@ public class MainFrame {
 		content.add(reset, "reset");
 		reset.setLayout(null);
 
-//		username4Reset = new JPasswordField();
-//		username4Reset.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//		username4Reset.setBounds(285, 157, 200, 50);
-//		reset.add(username4Reset);
-
 		JButton back = new JButton("BACK");
 		back.setFont(new Font("Verdana", Font.PLAIN, 15));
 		back.setBounds(251, 334, 89, 35);
 		reset.add(back);
-		back.addActionListener(new back_btn_reset(content,reset_label_info));
+		back.addActionListener(new back_btn_reset(content));
 
 		JButton Reset = new JButton("RESET");
 		Reset.setFont(new Font("Verdana", Font.PLAIN, 15));
@@ -672,11 +644,25 @@ public class MainFrame {
 		
 		class pwdReset_Action implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
+				
 				String email=email4reset.getText();
+				String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";  
+				Pattern regex = Pattern.compile(check);  
+				Matcher matcher = regex.matcher(email);  
+				boolean isMatched = matcher.matches();
 				String username=Reset_Username.getText();
-				CardLayout cards = (CardLayout) content.getLayout();
-				cards.show(content, "login");
-				new LogicalImple().reset(username, email);
+				if(isMatched){
+					if(!username.equals("")){
+						CardLayout cards = (CardLayout) content.getLayout();
+						cards.show(content, "login");
+						new LogicalImple().reset(username, email);
+					} else {
+						JOptionPane.showMessageDialog(null, "Username is empty");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Please input a valid email address!");
+				}
+				
 			}
 		}
 }

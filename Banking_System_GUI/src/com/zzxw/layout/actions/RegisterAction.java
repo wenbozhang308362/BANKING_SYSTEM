@@ -39,6 +39,7 @@ public class RegisterAction implements ActionListener{
 
 
 
+	@SuppressWarnings("deprecation")
 	public void actionPerformed(ActionEvent e) {
 		if (!new_password.getText().isEmpty()&&!new_password.getText().isEmpty()) {
 			LogicalImple li= new LogicalImple();
