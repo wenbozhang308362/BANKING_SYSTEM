@@ -178,6 +178,30 @@ public class LogicalImple {
 		
 	}
 	
+	public int PwdReset(String username,String newPwd, String[][] info){
+		int userindex=0;
+		int count=0;
+		for(int i=0;i<info.length;i++){
+			if(username.equals(info[i][1])){
+				userindex=i;
+				count++;
+				}
+			}
+		if(count>0){
+			info[userindex][2]=newPwd;
+			try {
+				new BankIO().writeexcel(info);
+				System.out.println("Password reset sucessful");
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e);
+			}
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+	
 //	public static void main(String[] args) {
 //		String[][] test={{"1","asd","123456","1000"},{"2","asdfgh","234567","500"}};
 //		String[] s=new LogicalImple().loginVerification("asd", "123456",test);

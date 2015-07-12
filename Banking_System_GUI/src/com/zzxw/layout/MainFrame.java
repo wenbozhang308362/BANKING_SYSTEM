@@ -38,12 +38,16 @@ import java.awt.Color;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
 
+import org.apache.commons.mail.*;
+
 import com.zzxw.layout.actions.Exit;
 import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
 import com.zzxw.layout.actions.RegisterMouseAdapter;
+import com.zzxw.layout.actions.Reset_button;
 import com.zzxw.layout.actions.back_btn;
+import com.zzxw.layout.actions.back_btn_reset;
 import com.zzxw.layout.actions.login_btn;
 import com.zzxw.layout.actions.logoff_btn;
 
@@ -73,6 +77,8 @@ public class MainFrame {
 	JLabel Detail_balance;
 
 	static BankIO bIO = new BankIO();
+	private JTextField email4reset;
+	private JTextField Reset_Username;
 
 	/**
 	 * Launch the application.
@@ -497,26 +503,48 @@ public class MainFrame {
 		content.add(reset, "reset");
 		reset.setLayout(null);
 
-		username4Reset = new JPasswordField();
-		username4Reset.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		username4Reset.setBounds(285, 157, 200, 50);
-		reset.add(username4Reset);
+//		username4Reset = new JPasswordField();
+//		username4Reset.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//		username4Reset.setBounds(285, 157, 200, 50);
+//		reset.add(username4Reset);
 
 		JButton back = new JButton("BACK");
 		back.setFont(new Font("Verdana", Font.PLAIN, 15));
-		back.setBounds(269, 310, 89, 35);
+		back.setBounds(251, 334, 89, 35);
 		reset.add(back);
+		back.addActionListener(new back_btn_reset(content));
 
 		JButton Reset = new JButton("RESET");
 		Reset.setFont(new Font("Verdana", Font.PLAIN, 15));
-		Reset.setBounds(399, 310, 129, 35);
+		Reset.setBounds(392, 334, 89, 35);
 		reset.add(Reset);
+		Reset.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String email=email4reset.getText();
+				String username=Reset_Username.getText();
+				new TestCommon(email,username).main(null);
+			}
+		});
+		//Reset.addActionListener(new Reset_button());
 
-		JLabel reset_label_info = new JLabel("Please enter your Username: ");
+		JLabel reset_label_info = new JLabel("Please enter your Email & Username : ");
 		reset_label_info.setFont(new Font("Verdana", Font.PLAIN, 22));
 		reset_label_info.setHorizontalAlignment(SwingConstants.CENTER);
-		reset_label_info.setBounds(30, 55, 414, 68);
+		reset_label_info.setBounds(30, 55, 458, 68);
 		reset.add(reset_label_info);
+		
+		email4reset = new JTextField();
+		email4reset.setFont(new Font("Verdana", Font.PLAIN, 25));
+		email4reset.setColumns(10);
+		email4reset.setBounds(158, 134, 257, 50);
+		reset.add(email4reset);
+		
+		Reset_Username = new JTextField();
+		Reset_Username.setFont(new Font("Verdana", Font.PLAIN, 25));
+		Reset_Username.setColumns(10);
+		Reset_Username.setBounds(158, 227, 257, 50);
+		reset.add(Reset_Username);
 
 	}
 
@@ -648,6 +676,5 @@ public class MainFrame {
 				}
 			}
 		}
-
 }
 
