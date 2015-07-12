@@ -45,7 +45,6 @@ public class login_btn implements ActionListener{
 			String username="";
 			String pwd="";
 			username=username_input.getText();
-//			pwd=Arrays.toString(password_input.getPassword());
 			for(char a:password_input.getPassword()){
 				String temp=a+"";
 				pwd+=temp;
@@ -54,7 +53,6 @@ public class login_btn implements ActionListener{
 			try {
 				info = bIO.readexcel();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 				System.out.println("Read error from file!");
 			}
@@ -71,7 +69,8 @@ public class login_btn implements ActionListener{
 				accountNumber.setVisible(true);				
 				userName.setText(uName);
 				userName.setVisible(true);
-				accountNumber.setText(accountNum);			
+				accountNumber.setText(accountNum);
+				JOptionPane.showMessageDialog(null, "Welcome " + username);
 			} else if(flag[0].equals("1")){
 				JOptionPane.showMessageDialog(null, "User does not exist,please re-enter");
 			} else if(flag[0].equals("2")){

@@ -93,7 +93,7 @@ public class MainFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Banking System");
+		frame = new JFrame("ZZWX Banking System");
 		frame.setBounds(100, 100, 608, 482);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -244,7 +244,7 @@ public class MainFrame {
 
 			{
 				DefaultMutableTreeNode node_1;
-				node_1 = new DefaultMutableTreeNode("Bank Service");
+				node_1 = new DefaultMutableTreeNode("Bank Services");
 				node_1.add(new DefaultMutableTreeNode("Withdraw"));
 				node_1.add(new DefaultMutableTreeNode("Deposit"));
 				add(node_1);
@@ -274,14 +274,14 @@ public class MainFrame {
 		welcome_panel.setLayout(null);
 
 		JLabel service_option = new JLabel(
-				"<html>Please select one <br> &nbsp; &nbsp; &nbsp;  option on the left .</html>");
+				"<html>Please select one service <br> &nbsp; &nbsp; &nbsp;  option on the left .</html>");
 		service_option.setFont(new Font("Verdana", Font.PLAIN, 20));
 		service_option.setHorizontalAlignment(SwingConstants.CENTER);
 		service_option.setBounds(81, 101, 278, 107);
 		welcome_panel.add(service_option);
 
 		JLabel Thankyou_label = new JLabel(
-				"Thank you for using our banking system");
+				"Thank you for using zzxw banking system");
 		Thankyou_label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Thankyou_label.setHorizontalAlignment(SwingConstants.CENTER);
 		Thankyou_label.setBounds(12, 13, 431, 75);
@@ -592,21 +592,22 @@ public class MainFrame {
 				LogicalImple li = new LogicalImple();
 				int i=li.withdraw(withdrawNum, username, info);
 				if(i==1){
-					JOptionPane.showMessageDialog(null, "Withdraw Amount Exceed Current Balance");
+					JOptionPane.showMessageDialog(null, "Withdraw Amount Exceeds Current Balance.");
+				}
+				if (i == 2){
+					JOptionPane.showMessageDialog(null, "Please deposit some money.");
+					CardLayout cards = (CardLayout) service_panel.getLayout();
+					cards.show(service_panel, "Deposit_panel");
 				}
 				try {
 					info = bIO.readexcel();
 //					System.out.println("balance from withd:"+info[2][3]);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 					System.out.println("Read error from file!");
 				}
-
 				label_4.setText(li.getBalance(username, info));
-
 			}
-
 		}
 		class PwdUpdate_Action implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
@@ -628,7 +629,7 @@ public class MainFrame {
 				}
 				
 				if(!newPwd.equals(newPwdConfirm)){
-					JOptionPane.showMessageDialog(null, "Two Passworld doesn't match");
+					JOptionPane.showMessageDialog(null, "Passwords don't match");
 				}
 				else{
 					LogicalImple li = new LogicalImple();
@@ -637,7 +638,7 @@ public class MainFrame {
 						JOptionPane.showMessageDialog(null, "Old Passworld is WRONG");
 					}
 					else{
-						JOptionPane.showMessageDialog(null, "Password change successful");
+						JOptionPane.showMessageDialog(null, "Password has been changed successfully");
 					}
 				}
 			}
