@@ -13,7 +13,15 @@
 
 package com.zzxw.layout;
 
+import java.awt.CardLayout;
 import java.util.Arrays;
+import java.util.Random;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import org.apache.commons.mail.*;
 
 public class LogicalImple {
 	
@@ -202,6 +210,49 @@ public class LogicalImple {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void reset(String username,String emailbox){
+		String[][] info=new String[0][];
+		SimpleEmail email = new SimpleEmail();
+		email.setHostName("smtp.qq.com");//need to open up the pop3.smtp service of the sender email
+
+		try {
+			email.addTo(emailbox);
+			email.setSSL(Boolean.TRUE); 
+			email.setSslSmtpPort("465"); // if don't use the port, there would be an exception
+			email.setAuthentication("419945501@qq.com","Wbt19900214!!");
+			email.setFrom("419945501@qq.com");
+			email.setSubject("Password Has Changed");
+			BankIO li=new BankIO();
+			String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";  
+			Random random = new Random();  
+			StringBuffer buf = new StringBuffer();  
+			for (int i = 0; i < 6; i++) {  
+				int num = random.nextInt(62);  
+				buf.append(str.charAt(num));  
+			}
+			
+			String st=buf.toString();
+			email.setMsg("Your password has been reset to "+st);
+			try {
+				info=li.readexcel();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			int i=new LogicalImple().PwdReset(username, st, info);
+			if(i==1){
+				JOptionPane.showMessageDialog(null, "User doesn't exist");
+			} else {
+				JOptionPane.showMessageDialog(null, "Your new password has been sent to your through email");
+				email.send();
+			}
+			
+		}
+		catch (EmailException ex) {
+			ex.printStackTrace();
+		}
+	}
 //	public static void main(String[] args) {
 //		String[][] test={{"1","asd","123456","1000"},{"2","asdfgh","234567","500"}};
 //		String[] s=new LogicalImple().loginVerification("asd", "123456",test);

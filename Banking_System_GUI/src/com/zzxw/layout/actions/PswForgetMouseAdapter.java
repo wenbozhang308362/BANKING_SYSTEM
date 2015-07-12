@@ -31,10 +31,5 @@ public class PswForgetMouseAdapter extends MouseAdapter {
 		cards.show(content, "reset");
 		info1.setVisible(false);
 		userName.setVisible(false);
-		JLabel psw_reset_label = new JLabel("Reset your password");
-		psw_reset_label.setFont(new Font("Verdana", Font.PLAIN, 20));
-		psw_reset_label.setHorizontalAlignment(SwingConstants.CENTER);
-		psw_reset_label.setBounds(143, 13, 267, 39);
-		frame.getContentPane().add(psw_reset_label);
 	}
 }

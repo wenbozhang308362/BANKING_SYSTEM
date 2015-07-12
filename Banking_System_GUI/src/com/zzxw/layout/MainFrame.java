@@ -45,7 +45,7 @@ import com.zzxw.layout.actions.PasswordUpdateMouseAdapter;
 import com.zzxw.layout.actions.PswForgetMouseAdapter;
 import com.zzxw.layout.actions.RegisterAction;
 import com.zzxw.layout.actions.RegisterMouseAdapter;
-import com.zzxw.layout.actions.Reset_button;
+//import com.zzxw.layout.actions.Reset_button;
 import com.zzxw.layout.actions.back_btn;
 import com.zzxw.layout.actions.back_btn_reset;
 import com.zzxw.layout.actions.login_btn;
@@ -75,6 +75,7 @@ public class MainFrame {
 	JButton button;
 	JButton button_2;
 	JLabel Detail_balance;
+	JLabel reset_label_info;
 
 	static BankIO bIO = new BankIO();
 	private JTextField email4reset;
@@ -512,23 +513,15 @@ public class MainFrame {
 		back.setFont(new Font("Verdana", Font.PLAIN, 15));
 		back.setBounds(251, 334, 89, 35);
 		reset.add(back);
-		back.addActionListener(new back_btn_reset(content));
+		back.addActionListener(new back_btn_reset(content,reset_label_info));
 
 		JButton Reset = new JButton("RESET");
 		Reset.setFont(new Font("Verdana", Font.PLAIN, 15));
 		Reset.setBounds(392, 334, 89, 35);
 		reset.add(Reset);
-		Reset.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				String email=email4reset.getText();
-				String username=Reset_Username.getText();
-				new TestCommon(email,username).main(null);
-			}
-		});
-		//Reset.addActionListener(new Reset_button());
+		Reset.addActionListener(new pwdReset_Action());
 
-		JLabel reset_label_info = new JLabel("Please enter your Email & Username : ");
+		reset_label_info = new JLabel("Please enter your Email & Username : ");
 		reset_label_info.setFont(new Font("Verdana", Font.PLAIN, 22));
 		reset_label_info.setHorizontalAlignment(SwingConstants.CENTER);
 		reset_label_info.setBounds(30, 55, 458, 68);
@@ -674,6 +667,16 @@ public class MainFrame {
 						JOptionPane.showMessageDialog(null, "Password change successful");
 					}
 				}
+			}
+		}
+		
+		class pwdReset_Action implements ActionListener{
+			public void actionPerformed(ActionEvent e) {
+				String email=email4reset.getText();
+				String username=Reset_Username.getText();
+				CardLayout cards = (CardLayout) content.getLayout();
+				cards.show(content, "login");
+				new LogicalImple().reset(username, email);
 			}
 		}
 }
