@@ -47,6 +47,7 @@ public class MainFrame {
 	private JLabel Uname;
 	private JLabel accountNumber;
 	private JLabel ActNum;
+	public JTextField username_input;
 	JLabel label_4;
 	JLabel label_7;
 	JButton button;
@@ -138,7 +139,7 @@ public class MainFrame {
 		login_password.setBounds(69, 189, 218, 62);
 		login.add(login_password);
 
-		JTextField username_input = new JTextField();
+		username_input = new JTextField();
 		username_input.setFont(new Font("Verdana", Font.PLAIN, 25));
 		username_input.setBounds(301, 75, 200, 50);
 		login.add(username_input);
@@ -300,38 +301,38 @@ public class MainFrame {
 		textField = new JTextField();
 		textField.setFont(new Font("Verdana", Font.PLAIN, 30));
 		textField.setColumns(10);
-		textField.setBounds(236, 151, 185, 37);
+		textField.setBounds(222, 166, 185, 37);
 		withdraw_panel.add(textField);
 
 		JLabel label_2 = new JLabel("WithDraw:");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_2.setBounds(28, 141, 206, 59);
+		label_2.setBounds(0, 156, 206, 59);
 		withdraw_panel.add(label_2);
 
 		JLabel label_3 = new JLabel("Balance:");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_3.setBounds(26, 33, 180, 48);
+		label_3.setBounds(14, 59, 180, 48);
 		withdraw_panel.add(label_3);
 
 		label_4 = new JLabel("$");
 		label_4.setHorizontalAlignment(SwingConstants.LEFT);
 		label_4.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_4.setBounds(218, 33, 86, 48);
+		label_4.setBounds(222, 59, 185, 48);
 		withdraw_panel.add(label_4);
 
 		button = new JButton("OK");
 
 		button.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		button.setBounds(149, 284, 97, 25);
+		button.setBounds(135, 299, 97, 25);
 		withdraw_panel.add(button);
 		button.addActionListener(new Ok_btn_Action());
 
 		JButton button_1 = new JButton("BACK");
 		button_1.addActionListener(new back_btn(service_panel));
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		button_1.setBounds(305, 284, 97, 25);
+		button_1.setBounds(291, 299, 97, 25);
 		withdraw_panel.add(button_1);
 
 		JPanel deposit_panel = new JPanel();
@@ -347,7 +348,7 @@ public class MainFrame {
 		JLabel lblDeposit = new JLabel("Deposit:");
 		lblDeposit.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDeposit.setFont(new Font("Verdana", Font.BOLD, 30));
-		lblDeposit.setBounds(14, 156, 206, 59);
+		lblDeposit.setBounds(0, 156, 206, 59);
 		deposit_panel.add(lblDeposit);
 
 		JLabel label_6 = new JLabel("Balance:");
@@ -359,7 +360,7 @@ public class MainFrame {
 		label_7 = new JLabel("$");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
 		label_7.setFont(new Font("Verdana", Font.BOLD, 30));
-		label_7.setBounds(222, 59, 86, 48);
+		label_7.setBounds(222, 59, 185, 48);
 		deposit_panel.add(label_7);
 
 		button_2 = new JButton("OK");
