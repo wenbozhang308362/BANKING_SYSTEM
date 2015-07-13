@@ -646,6 +646,9 @@ public class MainFrame {
 				else if (i == 3) {
 					JOptionPane.showMessageDialog(null, "Password should contain at least 6 characters!");
 				}
+				else if (i == 4){
+					JOptionPane.showMessageDialog(null, "Password should be different from the username.");
+				}
 				else {
 					JOptionPane.showMessageDialog(null, "Password has been changed successfully");
 					passwordField.setText("");

@@ -192,20 +192,26 @@ public class LogicalImple {
 				return 2;
 			}
 			else{
-				if(newpwd.length() < 6){
-					System.out.println("The password should contain at least 6 characters.");
-					return 3;
+				if(username.equals(newpwd)){
+					System.out.println("Password should be different from the username!");
+					return 4;
 				}
 				else{
-					info[userindex][2]=newpwd;
-					try {
-						new BankIO().writeexcel(info);
-						System.out.println("Password has been changed sucessfully");
-					} catch (Exception e) {
-						// TODO: handle exception
-						System.out.println(e);
+					if(newpwd.length() < 6){
+						System.out.println("The password should contain at least 6 characters.");
+						return 3;
 					}
-					return 0;	//change pwd success
+					else{
+						info[userindex][2]=newpwd;
+						try {
+							new BankIO().writeexcel(info);
+							System.out.println("Password has been changed sucessfully");
+						} catch (Exception e) {
+							// TODO: handle exception
+							System.out.println(e);
+						}
+						return 0;	//change pwd success
+					}
 				}
 			} 
 		}else{
