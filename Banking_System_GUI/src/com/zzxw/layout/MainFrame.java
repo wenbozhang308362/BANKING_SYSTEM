@@ -256,12 +256,12 @@ public class MainFrame {
 		}));
 		service_tree.setBounds(0, 0, 135, 385);
 		service_tree
-				.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-					public void valueChanged(
-							javax.swing.event.TreeSelectionEvent evt) {
-						treeValueChanged(evt);
-					}
-				});
+		.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+			public void valueChanged(
+					javax.swing.event.TreeSelectionEvent evt) {
+				treeValueChanged(evt);
+			}
+		});
 		business.add(service_tree);
 
 		service_panel = new JPanel();
@@ -499,18 +499,20 @@ public class MainFrame {
 		reset_label_info.setHorizontalAlignment(SwingConstants.CENTER);
 		reset_label_info.setBounds(30, 55, 458, 68);
 		reset.add(reset_label_info);
-		
+
 		email4reset = new JTextField();
 		email4reset.setFont(new Font("Verdana", Font.PLAIN, 25));
 		email4reset.setColumns(10);
 		email4reset.setBounds(158, 134, 257, 50);
 		reset.add(email4reset);
-		
+		email4reset.setToolTipText("Please enter your email here.");
+
 		Reset_Username = new JTextField();
 		Reset_Username.setFont(new Font("Verdana", Font.PLAIN, 25));
 		Reset_Username.setColumns(10);
 		Reset_Username.setBounds(158, 227, 257, 50);
 		reset.add(Reset_Username);
+		Reset_Username.setToolTipText("Please enter your username here.");
 
 	}
 
@@ -548,7 +550,7 @@ public class MainFrame {
 			Uname.setText(username);
 			String accountN=accountNumber.getText();
 			ActNum.setText(accountN);	
-			
+
 			try {
 				info = bIO.readexcel();
 			} catch (Exception e1) {
@@ -564,116 +566,119 @@ public class MainFrame {
 	}
 
 
-		class Depo_OK_btn_Action implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				String username = userName.getText();
-				String depositNum = textField_1.getText();
-				LogicalImple li = new LogicalImple();
-				li.deposit(depositNum, username, info);
+	class Depo_OK_btn_Action implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String username = userName.getText();
+			String depositNum = textField_1.getText();
+			LogicalImple li = new LogicalImple();
+			li.deposit(depositNum, username, info);
 
-				try {
-					info = bIO.readexcel();
-//					System.out.println("balance from depo:" + info[2][3]);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					System.out.println("Read error from file!");
-				}
-
-				label_7.setText(li.getBalance(username, info));
-
+			try {
+				info = bIO.readexcel();
+				//					System.out.println("balance from depo:" + info[2][3]);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
 			}
+
+			label_7.setText(li.getBalance(username, info));
+
 		}
-		
-		class Ok_btn_Action implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				String username = userName.getText();
-				String withdrawNum = textField.getText();
+	}
+
+	class Ok_btn_Action implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String username = userName.getText();
+			String withdrawNum = textField.getText();
+			LogicalImple li = new LogicalImple();
+			int i=li.withdraw(withdrawNum, username, info);
+			if(i==1){
+				JOptionPane.showMessageDialog(null, "Withdraw Amount Exceeds Current Balance.");
+			}
+			if (i == 2){
+				JOptionPane.showMessageDialog(null, "Please deposit some money.");
+				CardLayout cards = (CardLayout) service_panel.getLayout();
+				cards.show(service_panel, "Deposit_panel");
+			}
+			try {
+				info = bIO.readexcel();
+				//					System.out.println("balance from withd:"+info[2][3]);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				System.out.println("Read error from file!");
+			}
+			label_4.setText(li.getBalance(username, info));
+		}
+	}
+	class PwdUpdate_Action implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String username = userName.getText();
+			String oldPwd = "";
+			for(char a:passwordField.getPassword()){
+				String temp=a+"";
+				oldPwd+=temp;
+			}
+			String newPwd = "";
+			for(char a:passwordField_1.getPassword()){
+				String temp=a+"";
+				newPwd+=temp;
+			}
+			String newPwdConfirm = "";
+			for(char a:passwordField_2.getPassword()){	
+				String temp=a+"";
+				newPwdConfirm+=temp;
+			}
+
+			if(!newPwd.equals(newPwdConfirm)){
+				JOptionPane.showMessageDialog(null, "Passwords don't match");
+			}
+			else{
 				LogicalImple li = new LogicalImple();
-				int i=li.withdraw(withdrawNum, username, info);
+				int i=li.changePwd(oldPwd, newPwd, username, info);
 				if(i==1){
-					JOptionPane.showMessageDialog(null, "Withdraw Amount Exceeds Current Balance.");
+					JOptionPane.showMessageDialog(null, "Old Passworld is WRONG");
 				}
-				if (i == 2){
-					JOptionPane.showMessageDialog(null, "Please deposit some money.");
+				else if (i == 2) {
+					JOptionPane.showMessageDialog(null, "New password should be different from the old password!");
+				}
+				else if (i == 3) {
+					JOptionPane.showMessageDialog(null, "Password should contain at least 6 characters!");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Password has been changed successfully");
+					passwordField.setText("");
 					CardLayout cards = (CardLayout) service_panel.getLayout();
-					cards.show(service_panel, "Deposit_panel");
-				}
-				try {
-					info = bIO.readexcel();
-//					System.out.println("balance from withd:"+info[2][3]);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					System.out.println("Read error from file!");
-				}
-				label_4.setText(li.getBalance(username, info));
-			}
-		}
-		class PwdUpdate_Action implements ActionListener {
-			public void actionPerformed(ActionEvent e) {
-				String username = userName.getText();
-				String oldPwd = "";
-				for(char a:passwordField.getPassword()){
-					String temp=a+"";
-					oldPwd+=temp;
-				}
-				String newPwd = "";
-				for(char a:passwordField_1.getPassword()){
-					String temp=a+"";
-					newPwd+=temp;
-				}
-				String newPwdConfirm = "";
-				for(char a:passwordField_2.getPassword()){	
-					String temp=a+"";
-					newPwdConfirm+=temp;
-				}
-				
-				if(!newPwd.equals(newPwdConfirm)){
-					JOptionPane.showMessageDialog(null, "Passwords don't match");
-				}
-				else{
-					LogicalImple li = new LogicalImple();
-					int i=li.changePwd(oldPwd, newPwd, username, info);
-					if(i==1){
-						JOptionPane.showMessageDialog(null, "Old Passworld is WRONG");
-					}
-					else if (oldPwd.equals(newPwdConfirm)) {
-						JOptionPane.showMessageDialog(null, "New password should be different from the old password!");
-					}
-					else if (!oldPwd.equals(newPwdConfirm)){
-						JOptionPane.showMessageDialog(null, "Password has been changed successfully");
-						passwordField.setText("");
-						CardLayout cards = (CardLayout) service_panel.getLayout();
-						cards.show(service_panel, "Details_panel");
-						//passwordField1.setText("");
-						//passwordField2.setText("");
-					}
+					cards.show(service_panel, "Details_panel");
+					//passwordField1.setText("");
+					//passwordField2.setText("");
 				}
 			}
 		}
-		
-		class pwdReset_Action implements ActionListener{
-			public void actionPerformed(ActionEvent e) {
-				
-				String email=email4reset.getText();
-				String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";  
-				Pattern regex = Pattern.compile(check);  
-				Matcher matcher = regex.matcher(email);  
-				boolean isMatched = matcher.matches();
-				String username=Reset_Username.getText();
-				if(isMatched){
-					if(!username.equals("")){
-						CardLayout cards = (CardLayout) content.getLayout();
-						cards.show(content, "login");
-						new LogicalImple().reset(username, email);
-					} else {
-						JOptionPane.showMessageDialog(null, "Username is empty");
-					}
+	}
+
+	class pwdReset_Action implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+
+			String email=email4reset.getText();
+			String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";  
+			Pattern regex = Pattern.compile(check);  
+			Matcher matcher = regex.matcher(email);  
+			boolean isMatched = matcher.matches();
+			String username=Reset_Username.getText();
+			if(isMatched){
+				if(!username.equals("")){
+					CardLayout cards = (CardLayout) content.getLayout();
+					cards.show(content, "login");
+					new LogicalImple().reset(username, email);
 				} else {
-					JOptionPane.showMessageDialog(null, "Please input a valid email address!");
+					JOptionPane.showMessageDialog(null, "Username is empty");
 				}
-				
+			} else {
+				JOptionPane.showMessageDialog(null, "Please input a valid email address!");
 			}
+
 		}
+	}
 }
 

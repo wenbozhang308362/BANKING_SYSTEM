@@ -53,7 +53,6 @@ public class RegisterAction implements ActionListener{
 			try {
 				info=new BankIO().readexcel();
 			} catch (Exception e2) {
-				// TODO: handle exception
 				System.out.println(e2);
 			}
 			String str=li.regist(username, pwd, info);
@@ -63,10 +62,13 @@ public class RegisterAction implements ActionListener{
 				cards.show(content, "login");
 			}
 			else if(str.equals("2")){
-				JOptionPane.showMessageDialog(null, "Password should be different from the username");
+				JOptionPane.showMessageDialog(null, "Password should be different from the username.");
+			}
+			else if(str.equals("3")){
+				JOptionPane.showMessageDialog(null, "Password should contain at least 6 characters.");
 			}
 			else{
-				JOptionPane.showMessageDialog(null, "Username Already Exsit");
+				JOptionPane.showMessageDialog(null, "Username Already Exsited");
 			}
 			info1.setVisible(true);
 			userName.setVisible(true);

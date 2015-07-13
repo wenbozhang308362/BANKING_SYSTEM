@@ -152,20 +152,26 @@ public class LogicalImple {
 				return "2";
 			}
 			else{
-				String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
-				info=Arrays.copyOf(info, info.length+1);	
-				info[info.length-1]=new String[4];
-				for(int i=0;i<newuser.length;i++){
-					info[info.length-1][i]=newuser[i];
+				if(pwd.length() < 6){
+					System.out.println("Password should contain at least 6 characters.");
+					return "3";
 				}
-				try {
-					new BankIO().writeexcel(info);
-				} catch (Exception e) {
-					// TODO: handle exception
-					System.out.println(e);
+				else{
+					String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
+					info=Arrays.copyOf(info, info.length+1);	
+					info[info.length-1]=new String[4];
+					for(int i=0;i<newuser.length;i++){
+						info[info.length-1][i]=newuser[i];
+					}
+					try {
+						new BankIO().writeexcel(info);
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println(e);
+					}
+					System.out.println("Register sucessfully");
+					return "0";	//successful 
 				}
-				System.out.println("Register sucessfully");
-				return "0";	//successful 
 			}
 		}
 
@@ -181,16 +187,28 @@ public class LogicalImple {
 		System.out.println(oldpwd);
 		//		System.out.println(newpwd);
 		if(oldpwd.equals(info[userindex][2])){
-			info[userindex][2]=newpwd;
-			try {
-				new BankIO().writeexcel(info);
-				System.out.println("Password has been changed sucessfully");
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e);
+			if(oldpwd.equals(newpwd)){
+				System.out.println("new password should be different from the old password");
+				return 2;
 			}
-			return 0;	//change pwd success
-		} else{
+			else{
+				if(newpwd.length() < 6){
+					System.out.println("The password should contain at least 6 characters.");
+					return 3;
+				}
+				else{
+					info[userindex][2]=newpwd;
+					try {
+						new BankIO().writeexcel(info);
+						System.out.println("Password has been changed sucessfully");
+					} catch (Exception e) {
+						// TODO: handle exception
+						System.out.println(e);
+					}
+					return 0;	//change pwd success
+				}
+			} 
+		}else{
 			System.out.println("wrong");
 			return 1;	//pwd wrong
 		}
