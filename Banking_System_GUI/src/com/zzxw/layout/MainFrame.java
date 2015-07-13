@@ -106,6 +106,7 @@ public class MainFrame {
 		JLabel info1 = new JLabel("Welcome:");
 		info1.setHorizontalAlignment(SwingConstants.RIGHT);
 		info1.setBounds(12, 13, 64, 26);
+		info1.setVisible(true);
 		frame.getContentPane().add(info1);
 
 		userName = new JLabel("Guest");
