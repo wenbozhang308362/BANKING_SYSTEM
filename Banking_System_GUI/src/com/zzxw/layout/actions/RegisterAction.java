@@ -61,7 +61,11 @@ public class RegisterAction implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Register Successfully");
 				CardLayout cards = (CardLayout) content.getLayout();
 				cards.show(content, "login");
-			} else{
+			}
+			else if(str.equals("2")){
+				JOptionPane.showMessageDialog(null, "Password should be different from the username");
+			}
+			else{
 				JOptionPane.showMessageDialog(null, "Username Already Exsit");
 			}
 			info1.setVisible(true);

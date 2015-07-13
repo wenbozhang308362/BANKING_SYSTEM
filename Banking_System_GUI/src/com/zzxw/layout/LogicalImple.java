@@ -146,22 +146,29 @@ public class LogicalImple {
 			System.out.println("User name already existed");
 			return "1";	//user name already exist
 		}
-		else {
-			String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
-			info=Arrays.copyOf(info, info.length+1);	
-			info[info.length-1]=new String[4];
-			for(int i=0;i<newuser.length;i++){
-				info[info.length-1][i]=newuser[i];
+		else  {
+			if(username.equals(pwd)){
+				System.out.println("Password should be different from the username");
+				return "2";
 			}
-			try {
-				new BankIO().writeexcel(info);
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e);
+			else{
+				String[] newuser={Integer.toString(info.length+1),username,pwd,Integer.toString(0)};
+				info=Arrays.copyOf(info, info.length+1);	
+				info[info.length-1]=new String[4];
+				for(int i=0;i<newuser.length;i++){
+					info[info.length-1][i]=newuser[i];
+				}
+				try {
+					new BankIO().writeexcel(info);
+				} catch (Exception e) {
+					// TODO: handle exception
+					System.out.println(e);
+				}
+				System.out.println("Register sucessfully");
+				return "0";	//successful 
 			}
-			System.out.println("Register sucessfully");
-			return "0";	//successful 
 		}
+
 	}
 
 	public int changePwd(String oldpwd,String newpwd,String username,String[][] info){
