@@ -604,7 +604,6 @@ public class MainFrame {
 			}
 			try {
 				info = bIO.readexcel();
-				//					System.out.println("balance from withd:"+info[2][3]);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 				System.out.println("Read error from file!");
